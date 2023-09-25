@@ -1,0 +1,106 @@
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: var(--size-2xl);
+    padding-bottom: var(--size-2xl);
+    padding-right: var(--size-2xl);
+    background-color: var(--clr-dark);
+    box-shadow: 0 0px 0px rgb(139, 92, 246, 0.1), 0 -10px 22px rgb(139, 92, 246, 0.3), 0 0 18px 3px var(--clr-violet500);
+    position: relative;
+    z-index: 9999;
+}
+
+.header__menu {
+    display: none;
+}
+
+.header__bars {
+    display: block;
+    color: var(--clr-light);
+    height: var(--size-2xl);
+    width: var(--size-2xl);
+}
+
+/* xs */
+@media (min-width: 475px) {
+}
+
+/* sm */
+@media (min-width: 576px) {
+}
+
+/* md */
+@media (min-width: 768px) {
+    .header__menu {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        gap: 2rem;
+    }
+
+    .header__link {
+        color: var(--clr-slate200);
+        text-decoration: none;
+        letter-spacing: -0.05em;
+        font-weight: 600;
+        font-size: var(--size-xs);
+        transition: color 0.3s;
+        &:hover {
+            color: var(--clr-blue400);
+        }
+    }
+
+    .header__line {
+        border: 1px solid var(--clr-slate800);
+        padding-top: var(--size-xl);
+    }
+
+    .header__sun {
+        display: block;
+        height: var(--size-base);
+        width: var(--size-base);
+        color: var(--clr-slate400);
+    }
+    .header__moon {
+        display: none;
+        height: var(--size-base);
+        width: var(--size-base);
+        color: var(--clr-slate400);
+    }
+    .header__resume {
+        font-size: var(--size-xs);
+        letter-spacing: -0.01em;
+        font-weight: 400;
+    }
+
+    .header__bars {
+        display: none;
+    }
+}
+
+/* lg */
+@media (min-width: 992px) {
+    .header__link {
+        font-size: var(--size-sm);
+    }
+
+    .header__sun {
+        width: var(--size-xl);
+        height: var(--size-xl);
+    }
+
+    .header__resume {
+        font-size: var(--size-xs);
+    }
+}
+
+/* xl */
+@media (min-width: 1200px) {
+}
+
+/* xxl */
+@media (min-width: 1400px) {
+}
+

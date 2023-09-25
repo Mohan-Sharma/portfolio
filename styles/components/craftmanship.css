@@ -1,0 +1,116 @@
+.experience {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-base);
+}
+
+.experience__overview__line {
+    width: 100%;
+    border-color:  var(--clr-slate800);
+}
+
+.experience__overview__text {
+    text-align: start;
+    text-decoration-color: var(--clr-slate400);
+    color: var(--clr-slate300);
+    font-size: var(--size-sm);
+    line-height: 1.9;
+    margin-left: var(--size-2xs);
+}
+
+.experience__box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 1px 8px 0 var(--clr-violet500);
+    padding-left: var(--size-xs);
+    padding-right: var(--size-xs);
+    border-radius: var(--size-3xs);
+}
+
+.experience__designation {
+    color: var(--clr-slate300);
+    font-size: var(--size-sm);
+    font-weight: 400;
+    line-height: 1.9;
+    letter-spacing: 0.01em;
+}
+
+.experience__company {
+    color: var(--clr-slate300);
+    font-size: var(--size-base);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.experience_timeline {
+    color: var(--clr-slate400);
+    font-size: var(--size-xs);
+    text-transform: none;
+    padding-left: var(--size-3xs);
+    padding-top: var(--size-3xs);
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+.experience__crafting__overview {
+    max-width: 40ch;
+    color: var(--clr-slate400);
+    font-size: var(--size-sm);
+}
+
+.experience_companies-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2xl)
+}
+
+/* xs */
+@media (min-width: 475px) {
+    .experience__overview__text {
+        text-align: center;
+    }
+
+}
+
+/* sm */
+@media (min-width: 576px) {
+    .experience__overview__text {
+        font-size: var(--size-lg);
+    }
+}
+
+/* md */
+@media (min-width: 768px) {
+}
+
+/* lg */
+@media (min-width: 992px) {
+    .experience_companies-container {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .experience__designation {
+        font-size: var(--size-base);
+    }
+    .experience__company {
+        font-size: var(--size-lg);
+    }
+    .experience_timeline {
+        font-size: 0.5rem;
+    }
+}
+
+/* xl */
+@media (min-width: 1200px) {
+    .experience_timeline {
+        font-size: var(--size-xs);
+    }
+}
+
+/* xxl */
+@media (min-width: 1400px) {
+}

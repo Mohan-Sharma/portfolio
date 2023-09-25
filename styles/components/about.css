@@ -1,0 +1,114 @@
+.about {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: var(--size-base);
+}
+
+.profile__overview__line {
+    border-color:  var(--clr-slate800);
+}
+
+.profile__profession {
+    color: var(--clr-slate300);
+    font-size: var(--size-2xl);
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+}
+
+.profile__overview__exp {
+    max-width: 60ch;
+    color: var(--clr-slate400);
+    font-size: var(--size-sm);
+}
+
+.profile__technologies {
+    text-align: start;
+    text-decoration-color: var(--clr-slate400);
+    color: var(--clr-slate300);
+    font-size: var(--size-sm);
+    line-height: 1.9;
+    margin-left: var(--size-2xs);
+}
+
+.profile__technologies-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: var(--size-2xs);
+    justify-content: center;
+    align-items: center;
+}
+
+.profile__techstack-container {
+    display: flex;
+    &::before {
+        content: '\2654';
+        color: green;
+        font-size: var(--size-lg);
+    }
+}
+
+.profile__overview__techstack {
+    font-size: var(--size-sm);
+    color: var(--clr-slate300);
+    text-align: start;
+    padding-top: var(--size-4xs);
+    min-width: 200px;
+    &::before {
+        content: '';
+        padding-left: var(--size-xs);
+    }
+}
+
+/* xs */
+@media (min-width: 475px) {
+    .profile__technologies-container {
+    }
+    .profile__technologies {
+        text-align: center;
+    }
+    .profile__techstack-container {
+        text-align: start;
+    }
+}
+
+/* sm */
+@media (min-width: 576px) {
+    .about {
+        gap: var(--size-xl);
+    }
+    .profile__profession {
+        font-size: var(--size-3xl);
+        letter-spacing: 0.00em;
+    }
+    .profile__overview__exp {
+        font-size: var(--size-lg);
+    }
+    .profile__technologies {
+        font-size: var(--size-lg);
+    }
+}
+
+/* md */
+@media (min-width: 768px) {
+    .profile__overview__exp {
+        max-width: 200ch;
+    }
+    .profile__techstack-container {
+        &::before {
+            font-size: var(--size-xl);
+        }
+    }
+}
+
+/* lg */
+@media (min-width: 992px) {
+}
+
+/* xl */
+@media (min-width: 1200px) {
+}
+
+/* xxl */
+@media (min-width: 1400px) {
+}

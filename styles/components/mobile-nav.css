@@ -1,0 +1,86 @@
+.mobile-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: var(--clr-dark);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.mobile-nav__menu {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mobile-nav__link {
+    font-size: var(--size-sm);
+    text-decoration: none;
+    color: var(--clr-slate200);
+    letter-spacing: -0.05em;
+    font-weight: 600;
+    transition: color 0.3s;
+
+    &:hover {
+        color: var(--clr-blue400);
+    }
+}
+
+.mobile-nav__link-line {
+    border: 1px solid var(--clr-slate800);
+    padding-right: var(--size-xl);
+}
+
+.mobile-nav__sun {
+    /* since the svg is inside button, its default display is inline block hence the icon is not centered, so use block display */
+    display: block;
+    width: var(--size-xl);
+    height: var(--size-xl);
+}
+
+.mobile-nav__moon {
+    /* since the svg is inside button, its default display is inline block hence the icon is not centered, so use block display */
+    display: none;
+    width: var(--size-xl);
+    height: var(--size-xl);
+}
+
+.mobile-nav__resume {
+    font-size: var(--size-xs);
+    letter-spacing: -0.01em;
+    font-weight: 400;
+}
+
+
+/* xs */
+@media (min-width: 475px) {
+}
+
+/* sm */
+@media (min-width: 576px) {
+}
+
+/* md */
+@media (min-width: 768px) {
+}
+
+/* lg */
+@media (min-width: 992px) {
+}
+
+/* xl */
+@media (min-width: 1200px) {
+}
+
+/* xxl */
+@media (min-width: 1400px) {
+}
