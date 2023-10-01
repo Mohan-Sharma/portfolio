@@ -62,6 +62,32 @@
 .blur__loading {
     background-position: center;
     background-size: cover;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        animation: pulse 2s infinite;
+        background-color: rgba(139, 92, 246, 0.1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        background-color: rgba(139, 92, 246, 0.1);
+    }
+    50% {
+        background-color: rgba(139, 92, 246, 0);
+    }
+    100% {
+        background-color: rgba(139, 92, 246, 0.1);
+    }
+}
+
+.blur__loading.img__loaded:before {
+    content: '';
+    animation: none;
 }
 
 .blur__loading.img__loaded > img {
