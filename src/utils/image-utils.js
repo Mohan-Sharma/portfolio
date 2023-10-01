@@ -1,22 +1,18 @@
-/**
- * @author Mohan Sharma
- */
-
 export const blurImage = () => {
     const imgContainerDivs = document.querySelectorAll('.blur__loading');
 
     imgContainerDivs.forEach(imgContainerDiv => {
-        const img = document.querySelector('img.project__tectstack');
-
-        function imageLoaded() {
-            imgContainerDiv.style.backgroundImage = 'none';
-            imgContainerDiv.classList.add('img__loaded');
-        }
+        const img = imgContainerDiv.querySelector('img');
 
         if (img.complete) {
             imageLoaded();
         } else {
             img.addEventListener('load', imageLoaded);
+        }
+
+        function imageLoaded() {
+            imgContainerDiv.style.backgroundImage = 'none';
+            imgContainerDiv.classList.add('img__loaded');
         }
     });
 };
