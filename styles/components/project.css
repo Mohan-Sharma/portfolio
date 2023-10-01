@@ -65,12 +65,12 @@
 }
 
 .blur__loading.img__loaded > img {
-    display: block;
+    opacity: 1;
 }
 
 .blur__loading > img {
-    display: none;
-    transition: display 450ms ease-in-out;
+    opacity: 0;
+    transition: opacity 450ms ease-in-out;
 }
 
 .project__tectstack {

@@ -2,7 +2,7 @@ export const blurImage = () => {
     const imgContainerDivs = document.querySelectorAll('.blur__loading');
 
     imgContainerDivs.forEach(imgContainerDiv => {
-        const img = imgContainerDiv.querySelector('img');
+        const img = imgContainerDiv.querySelector('img.project__tectstack');
 
         if (img.complete) {
             imageLoaded();
