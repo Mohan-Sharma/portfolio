@@ -9,8 +9,10 @@ import '../styles/components/project.css'
 import '../styles/components/mobile-nav.css'
 import '../styles/utils.css';
 
+import { blurImage } from "./utils/image-utils.js";
 import  { toggleMobileNav } from "./utils/mobile-nav.js";
 import { toggleTheme } from './utils/theme-toggle.js';
 
+blurImage();
 toggleMobileNav();
 toggleTheme();

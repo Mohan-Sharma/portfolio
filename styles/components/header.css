@@ -121,4 +121,33 @@
 /* xxl */
 @media (min-width: 1400px) {
 }
+/*
 
+.button {
+    --color: hsl(208, 72%, 39%);
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    border: 5px solid var(--color);
+    color: white;
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    position: relative;
+    isolation: isolate;
+}
+
+.button:after {
+    content: '';
+    position: absolute;
+    z-index: -111;
+    background-color: var(--color);
+    inset: 0;
+    scale: 0 1;
+    transform-origin: right;
+    transition: scale 452ms;
+}
+
+.button:hover::after, .button:focus-visible::after {
+    scale: 1 1;
+    transform-origin: left;
+}*/

@@ -59,6 +59,25 @@
     }
 }
 
+.blur__loading {
+    background-position: center;
+    background-size: cover;
+}
+
+.blur__loading.img__loaded > img {
+    display: block;
+}
+
+.blur__loading > img {
+    display: none;
+    transition: display 450ms ease-in-out;
+}
+
+.project__tectstack {
+    object-fit: cover;
+    object-position: center;
+}
+
 /* xs */
 @media (min-width: 475px) {
     .project__heading {
