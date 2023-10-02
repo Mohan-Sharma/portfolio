@@ -11,14 +11,17 @@
     --clr-gray400: #9ca3af;
     --clr-sky300: #7dd3fc;
     --clr-purple300: #d8b4fe;
+    --clr-purple500: #a855f7;
     --clr-blue700: #1d4ed8;
     --clr-blue400: #60a5fa;
     --clr-rose950: #4c0519;
+    --clr-rose700: #be123c;
     --clr-violet500: #8b5cf6;
     /* rgb value rgb(139, 92, 246) */
     --clr-green300: #86efac;
     --clr-green500: #22c55e;
     --clr-green700: #15803d;
+    --clr-cyan800: #155e75;
 
     /* sizes */
     --size-4xs: 0.10rem;
