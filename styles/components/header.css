@@ -13,6 +13,7 @@
 
 .header__menu {
     display: none;
+    gap: 2rem;
 }
 
 .header__bars {
@@ -32,12 +33,58 @@
 
 /* md */
 @media (min-width: 768px) {
+    .header__nav {
+    }
+
     .header__menu {
+        --_gap: 1rem;
         display: flex;
         align-items: center;
+        justify-content: left;
         list-style: none;
+        margin: 0;
         padding: 0;
-        gap: 2rem;
+        gap: 0;
+        /* using gap property here would create margin between the bottom lines of li animation */
+    }
+
+    .header__menu-item {
+        padding: calc(var(--_gap) / 2); /* avoid padding of 4 */
+        position: relative;
+    }
+
+    .header__menu-item:nth-child(-n+4) {
+        &::after {
+            content: '';
+            height: 2px;
+            position: absolute;
+            width: 100%;
+            background: var(--clr-violet500);
+            left: 0;
+            bottom: 0;
+            transition:
+                    scale 300ms var(--_scale_delay),
+                    translate 500ms var(--_transition_delay);
+            translate: var(--_translate, 0);
+            scale: var(--_scale, 0) 1;
+        }
+
+        &:hover {
+            --_scale: 1;
+        }
+        @supports selector(:has(h1)) {
+            &:hover + li {
+                --_translate: -100%;
+                --_scale_delay: 300ms;
+                --_transition_delay: 200ms;
+            }
+
+            &:has(+ :hover) {
+                --_translate: 100%;
+                --_scale_delay: 300ms;
+                --_transition_delay: 200ms;
+            }
+        }
     }
 
     .header__link {
@@ -46,7 +93,8 @@
         letter-spacing: -0.05em;
         font-weight: 600;
         font-size: var(--size-xs);
-        transition: color 0.3s;
+        text-transform: uppercase;
+        transition: color 550ms;
         &:hover {
             color: var(--clr-blue400);
         }
@@ -63,6 +111,7 @@
         width: var(--size-base);
         color: var(--clr-slate400);
     }
+
     .header__moon {
         display: none;
         height: var(--size-base);
