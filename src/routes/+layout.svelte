@@ -16,7 +16,7 @@
 </script>
 
 <!-- Theme Switcher - Fixed position -->
-<div class="fixed top-6 right-6 z-50">
+<div class="fixed top-6 right-6" style="z-index: 1002;">
 	<ThemeSwitcher />
 </div>
 

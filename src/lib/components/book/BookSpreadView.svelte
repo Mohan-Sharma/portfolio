@@ -46,14 +46,16 @@
 	let previousIndex = $state(0);
 	let isInitialized = $state(false);
 	let contentOpacity = $state(1); // Controls visibility of page content during transitions
+	let displayedPageIndex = $state(0); // The page index actually shown (lags behind currentPageIndex during animation)
 
 	// Watch for external page changes and animate
 	$effect(() => {
 		const current = currentPageIndex;
 
-		// Initialize previousIndex on first run
+		// Initialize on first run
 		if (!isInitialized) {
 			previousIndex = current;
+			displayedPageIndex = current;
 			isInitialized = true;
 			return;
 		}
@@ -81,7 +83,7 @@
 		const turningPage = document.createElement('div');
 		turningPage.className = 'turning-page';
 
-		// Copy content from the page that's turning
+		// Copy content from the page that's turning (BEFORE updating displayedPageIndex)
 		if (direction === 'next' && rightPageElement) {
 			turningPage.innerHTML = rightPageElement.innerHTML;
 			turningPage.classList.add('turn-right-to-left');
@@ -92,6 +94,10 @@
 
 		bookSpreadElement.appendChild(turningPage);
 		turningPageElement = turningPage;
+
+		// NOW update the displayed page index - this will update the underlying pages
+		// while the turning page animation plays over them
+		displayedPageIndex = currentPageIndex;
 
 		// Enhanced page turn animation with curl effect
 		const timeline = gsap.timeline();
@@ -237,8 +243,8 @@
 		};
 	});
 
-	// Get current spread pages
-	const leftPageIndex = $derived(Math.floor(currentPageIndex / 2) * 2);
+	// Get current spread pages - use displayedPageIndex to prevent premature content updates
+	const leftPageIndex = $derived(Math.floor(displayedPageIndex / 2) * 2);
 	const rightPageIndex = $derived(leftPageIndex + 1);
 	const leftPage = $derived(pages[leftPageIndex]);
 	const rightPage = $derived(pages[rightPageIndex]);
@@ -289,10 +295,10 @@
 		</button>
 	{/if}
 
-	<!-- Page indicator -->
+	<!-- Page indicator - use currentPageIndex for accurate display -->
 	{#if leftPage && leftPage.content.type !== 'cover'}
 		<div class="page-indicator">
-			<span>Pages {leftPageIndex + 1}-{Math.min(rightPageIndex + 1, pages.length)} of {pages.length}</span>
+			<span>Pages {Math.floor(currentPageIndex / 2) * 2 + 1}-{Math.min(Math.floor(currentPageIndex / 2) * 2 + 2, pages.length)} of {pages.length}</span>
 		</div>
 	{/if}
 
@@ -408,9 +414,9 @@
 		</button>
 
 		<div class="page-counter">
-			<span class="current">{leftPageIndex + 1}</span>
+			<span class="current">{Math.floor(currentPageIndex / 2) * 2 + 1}</span>
 			<span class="separator">-</span>
-			<span class="current">{Math.min(rightPageIndex + 1, pages.length)}</span>
+			<span class="current">{Math.min(Math.floor(currentPageIndex / 2) * 2 + 2, pages.length)}</span>
 			<span class="separator">/</span>
 			<span class="total">{pages.length}</span>
 		</div>
@@ -437,7 +443,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		padding: 2rem;
+		padding: 1rem 2rem 9rem 2rem; /* Extra bottom padding to clear navigation buttons */
 
 		/* 3D perspective on container for laptop-like tilt effect */
 		perspective: 2000px;
@@ -446,6 +452,7 @@
 		position: relative;
 		overflow: hidden;
 		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		z-index: 1001; /* Above BookOpeningAnimation (z-index: 1000) */
 	}
 
 	:global(.dark) .book-container {

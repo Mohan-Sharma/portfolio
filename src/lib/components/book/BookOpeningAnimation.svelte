@@ -19,7 +19,6 @@
 	let { coverData, pages, onComplete }: Props = $props();
 
 	let animationContainer: HTMLDivElement | undefined;
-	let isAnimationComplete = $state(false);
 
 	onMount(() => {
 		startOpeningAnimation();
@@ -29,8 +28,10 @@
 		if (!animationContainer) return;
 
 		const timeline = gsap.timeline({
+			defaults: {
+				ease: 'power2.out' // Default smooth easing
+			},
 			onComplete: () => {
-				isAnimationComplete = true;
 				onComplete?.();
 			}
 		});
@@ -40,154 +41,208 @@
 		const rightPage = animationContainer.querySelector('.book-right-page');
 		const frontFace = animationContainer.querySelector('.flipper-front');
 		const backFace = animationContainer.querySelector('.flipper-back');
+		const spine = animationContainer.querySelector('.animation-spine');
 
-		if (!bookContainer || !flipper || !rightPage || !frontFace || !backFace) return;
+		if (!bookContainer || !flipper || !rightPage || !frontFace || !backFace || !spine) return;
 
-		// --- PRE-CALC VALUES ---
-		// We need to match ClosedBookView dimensions exactly.
-		// ClosedBookView uses: clamp(300px, 50vw, 500px) width.
-		// We use the same here.
+		// Ensure container is fully visible at start
+		gsap.set(animationContainer, { opacity: 1 });
+
+		// --- CALCULATE DIMENSIONS FOR PIXEL-PERFECT POSITIONING ---
 		const closedWidthStr = 'clamp(300px, 50vw, 500px)';
 		const closedHeightStr = 'clamp(400px, 65vh, 700px)';
-		
-		// Open dimensions
-		const openPageWidth = '45vw'; 
-		const openPageHeight = '85vh';
 
-		// --- INITIAL STATE ---
-		
-		// 1. Dimensions
+		// Set initial dimensions to measure
 		gsap.set([flipper, rightPage], {
 			width: closedWidthStr,
 			height: closedHeightStr
 		});
 
-		// 2. Container Posture (Closed Book Match)
-		// CRITICAL FIX: The ClosedBookView centers the COVER.
-		// Our Hinge Model centers the SPINE.
-		// Since the Cover is to the RIGHT of the Spine (left:0), we must shift the container LEFT to match.
-		// We use xPercent: -50 on the ELEMENTS (flipper/rightPage) to center them? No.
-		// We shift the container. Since container is 0-width, we need pixel/percent offset relative to the Cover width.
-		// Since CSS clamp is hard to calculate in JS without layout, we rely on the visual assumption:
-		// We will animate 'x' from "-50%" (of the book width) to "0%".
-		// GSAP can handle simple units, but clamp is tricky.
-		// Let's rely on a calculated pixel value from getBoundingClientRect after setting width?
-		// No, let's just use a visual approximation or 'transform: translateX(-50%)' on the wrapper if valid.
-		
-		// Better Strategy: Set the specific 'x' offset.
-		// Assuming ~400px width, offset is -200px.
-		// Let's trust accurate pixel matching:
+		// Calculate actual pixel width after clamp
+		const actualWidth = flipper.getBoundingClientRect().width;
+		const centerOffset = -actualWidth / 2;
+
+		// Open dimensions - match BookSpreadView exactly
+		// BookSpreadView container has padding: 2rem (4rem total = 64px typical)
+		// BookSpreadView: 95% of (100vw - 64px) split into 2 pages
+		// Use calc() to match exactly: (95vw - 3.8rem) / 2 ≈ 47.5vw - 1.9rem
+		const openPageWidth = 'calc(47.5vw - 1.9rem)';
+		const openPageHeight = '85vh';
+
+		// --- INITIAL STATE (MATCH CLOSEDBOOK VIEW) ---
+
+		// Position: Match the tilted, off-center closed book
 		gsap.set(bookContainer, {
-			rotationX: 5,
-			rotationY: -25,
+			rotationX: 5,    // Slight tilt down
+			rotationY: -25,  // Tilted left
 			y: 0,
 			z: 0,
-			x: -200 // Approx half of 400px default. 
-            // Note: Ideally we measure this, but for the animation start, -200 provides a good "Centered Cover" guess.
+			x: centerOffset, // Center the cover visually
+			scale: 1,
+			transformPerspective: 2500
 		});
 
-		gsap.set(flipper, { rotationY: 0 });
-		
-		// 3. Flicker Fix: Ensure Backface Hidden & slight Z-offset
-		// We ensure the faces are just slightly separated to avoid fighting
-		gsap.set(frontFace, { z: 1 }); // Front bumps forward 1px
-		gsap.set(backFace, { z: -1 }); // Back bumps back 1px
-		
-		// 4. Content Hidden
-		gsap.set(backFace.querySelector('.page-content-wrapper'), { opacity: 0 });
-		gsap.set(rightPage.querySelector('.page-content-wrapper'), { opacity: 0 });
-		
-
-		// --- PHASE 1: CENTER (Presentation) ---
-		// Move UP, straighten rotations.
-		// KEEP x: -200 (Keep Cover Centered).
-		timeline.to(bookContainer, {
+		// Flipper starts flat (cover visible)
+		gsap.set(flipper, {
 			rotationY: 0,
-			rotationX: 0,
-			y: -30,
-			duration: 1.0,
-			ease: 'power3.out'
+			transformStyle: 'preserve-3d'
 		});
 
-		// --- PHASE 2: BREATHE ---
+		// Anti-flicker: Z-separation for faces
+		gsap.set(frontFace, { z: 2, backfaceVisibility: 'hidden' });
+		gsap.set(backFace, { z: -2, backfaceVisibility: 'hidden' });
+
+		// Hide content initially
+		gsap.set([
+			backFace.querySelector('.page-content-wrapper'),
+			rightPage.querySelector('.page-content-wrapper')
+		], {
+			opacity: 0
+		});
+
+		// Spine hidden initially - will expand with pages
+		gsap.set(spine, {
+			opacity: 0,
+			height: closedHeightStr // Start at closed book height
+		});
+
+		// --- PHASE 1: CENTER & STRAIGHTEN (1.2s) ---
+		// Smoothly bring book to center with no tilt
 		timeline.to(bookContainer, {
-			scale: 1.03,
-			duration: 0.25,
-			ease: 'sine.inOut',
-			yoyo: true,
-			repeat: 1
+			rotationY: 0,     // Remove horizontal tilt
+			rotationX: 0,     // Remove vertical tilt
+			y: -40,           // Lift slightly for presentation
+			scale: 1.02,      // Subtle scale for depth
+			duration: 1.2,
+			ease: 'power3.out' // Smooth deceleration
+		}, 'center');
+
+		// --- PHASE 2: ANTICIPATION BREATHE (0.4s) ---
+		// Small scale pulse - builds anticipation
+		timeline.to(bookContainer, {
+			scale: 1.05,
+			duration: 0.2,
+			ease: 'power1.inOut',
+		}, '+=0.3') // Short pause after centering
+		.to(bookContainer, {
+			scale: 1.0,
+			duration: 0.2,
+			ease: 'power1.inOut'
 		});
 
-		// --- PHASE 3: OPEN (Slide + Flip) ---
-		// The "Book Opening" Mechanic:
-		// 1. Cover Centers itself? No, the *Spread* centers itself.
-		//    So 'x' moves from -200 (Cover Centered) to 0 (Spine Centered).
-		// 2. Flipper rotates -180.
-		// 3. Pages Expand.
-		
+		// --- PHASE 3: THE OPENING (1.6s) ---
+		// Simultaneous: Slide spine to center + Expand pages + Flip cover
+
+		// 3a. Slide spine to center (cover moves right as spine centers)
 		timeline.to(
 			bookContainer,
 			{
-				x: 0, // Slide spine to center
-				duration: 1.4,
-				ease: 'power2.inOut'
+				x: 0, // Spine moves to center
+				y: 0, // Return to neutral height
+				duration: 1.6,
+				ease: 'power3.inOut' // Smooth acceleration and deceleration
 			},
 			'open'
 		);
 
+		// 3b. Expand pages to open book size - match BookSpreadView exactly
 		timeline.to(
 			[flipper, rightPage],
 			{
 				width: openPageWidth,
-				maxWidth: '850px',
-				minWidth: '400px', // Don't shrink below closed size
+				maxWidth: '900px', // Match BookSpreadView: 1800px / 2 = 900px
+				minWidth: '350px', // Match BookSpreadView: 700px / 2 = 350px
 				height: openPageHeight,
-				maxHeight: '1000px',
-				minHeight: '700px',
-				duration: 1.4,
-				ease: 'power2.inOut'
+				maxHeight: '1000px', // Match BookSpreadView
+				minHeight: '700px', // Match BookSpreadView
+				duration: 1.6,
+				ease: 'power3.inOut'
 			},
 			'open'
 		);
 
-		// 3b. Flip (0 -> -180)
-		// This naturally hides Cover and reveals Left Page (Back Face)
+		// 3c. Flip the cover (0° → -180°)
+		// Using a custom ease for more realistic page turn
 		timeline.to(
 			flipper,
 			{
 				rotationY: -180,
-				duration: 1.4,
-				ease: 'power2.inOut'
+				duration: 1.6,
+				ease: 'power2.inOut',
+				transformOrigin: 'left center'
 			},
 			'open'
 		);
-		
-		// 3c. Reveal Page Content
-		// FIX: Don't wait! Reveal content immediately as it flips so the user sees the page, not white void.
-		// We use 'open+=0.2' to give it a tiny moment, but mostly visible.
+
+		// 3d. Reveal spine as book opens (match BookSpreadView visibility)
+		// Animate both opacity and height to match page expansion
 		timeline.to(
-			[backFace.querySelector('.page-content-wrapper'), rightPage.querySelector('.page-content-wrapper')],
+			spine,
 			{
-				opacity: 1,
-				duration: 0.5,
-				ease: 'power1.out',
-				stagger: 0.1
+				opacity: 1, // Fully visible to match BookSpreadView
+				height: openPageHeight, // Match page height
+				maxHeight: '1000px', // Match page constraints
+				minHeight: '700px',
+				duration: 1.6, // Match page expansion duration
+				ease: 'power3.inOut' // Match page expansion easing
 			},
-			'open+=0.1' 
+			'open' // Start at same time as page expansion
 		);
 
-		// --- PHASE 4: LANDING ---
+		// 3e. Fade in page content progressively
+		// Left page appears first (as cover flips away)
+		timeline.to(
+			backFace.querySelector('.page-content-wrapper'),
+			{
+				opacity: 1,
+				duration: 0.6,
+				ease: 'power2.out'
+			},
+			'open+=0.5' // Start revealing midway through flip
+		);
+
+		// Right page appears shortly after
+		timeline.to(
+			rightPage.querySelector('.page-content-wrapper'),
+			{
+				opacity: 1,
+				duration: 0.6,
+				ease: 'power2.out'
+			},
+			'open+=0.7' // Stagger for natural feel
+		);
+
+		// --- PHASE 4: SETTLE TO FLAT (0.6s) ---
+		// Settle to flat position first
 		timeline.to(
 			bookContainer,
 			{
-				rotationX: 0, // Flat for reading
+				rotationX: 0, // Flat
+				rotationY: 0,
 				y: 0,
 				scale: 1,
-				duration: 1.0,
+				duration: 0.6,
 				ease: 'power2.out'
 			},
-			'-=0.5'
+			'-=0.4' // Overlap with previous animation
 		);
+
+		// --- PHASE 5: TILT TO READING ANGLE (1.4s) ---
+		// Smoothly tilt to the reading position (matches BookSpreadView)
+		// This creates a seamless transition to the open book view
+		timeline.to(
+			bookContainer,
+			{
+				rotationX: 15, // Match BookSpreadView's reading angle
+				y: 0,
+				duration: 1.4, // Slower for smooth, realistic feel
+				ease: 'power1.out' // Gentle ease - no bounce, natural deceleration
+			},
+			'+=0.3' // Slightly longer pause for natural feel
+		);
+
+		// Animation complete - BookSpreadView will appear on top with higher z-index
+		// No fade-out to prevent black screen flash
 	}
 
 	// Get first two pages for the animation
@@ -256,7 +311,9 @@
 		</div>
 
 		<!-- CENTER SPINE (Visual Only) -->
-		<div class="animation-spine"></div>
+		<div class="animation-spine">
+			<div class="spine-highlight"></div>
+		</div>
 
 	</div>
 </div>
@@ -272,6 +329,10 @@
 		perspective: 2500px; /* Strong perspective for 3D feel */
 		perspective-origin: center 50%;
 		z-index: 1000;
+		overflow: hidden;
+		/* Performance optimizations */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
 	:global(.dark) .animation-container {
@@ -282,12 +343,15 @@
 	.animation-book {
 		position: relative;
 		/* 0 size container - everything grows out from Center Spine */
-		width: 0; 
+		width: 0;
 		height: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		transform-style: preserve-3d;
+		/* Performance optimizations */
+		will-change: transform;
+		backface-visibility: hidden;
 	}
 
 	/* Common Page Styles */
@@ -297,7 +361,13 @@
 		top: 50%; /* Center Vertical */
 		transform: translateY(-50%);
 		background: #fff;
-		box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+		box-shadow:
+			0 10px 40px rgba(0, 0, 0, 0.2),
+			0 5px 15px rgba(0, 0, 0, 0.15);
+		/* Performance optimizations */
+		will-change: transform, width, height;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 	}
 
 	:global(.dark) .book-right-page, 
@@ -313,16 +383,21 @@
 		z-index: 1; /* Below flipper initially */
 	}
 
-	/* FLIPPER: Anchored RIGHT (Spine), Grows LEFT (Because of flip?) */
-	/* Wait, in Closed state, Cover sits ON TOP of Right Page. */
-	/* So Flipper should ALSO be Anchored Left and sit exactly on top of Right Page. */
-	/* When it opens (rotates -180), it swings Left. */
+	/* FLIPPER: Anchored to spine, flips open like a real book cover */
 	.book-flipper {
 		left: 0; /* Attach left edge to center spine */
 		transform-origin: left center; /* Hinge is on the Left (Spine) */
 		transform-style: preserve-3d;
 		z-index: 2; /* On top */
 		border-radius: 0 1rem 1rem 0; /* Matches Right Page when closed */
+		/* Smooth transitions */
+		transition: box-shadow 0.3s ease;
+	}
+
+	.book-flipper:hover {
+		box-shadow:
+			0 15px 50px rgba(0, 0, 0, 0.25),
+			0 8px 20px rgba(0, 0, 0, 0.2);
 	}
 
 	/* FACES */
@@ -405,21 +480,103 @@
 	:global(.dark) .decoration-dot { background: #e27d60; }
 	.cover-decoration { display: flex; align-items: center; justify-content: center; gap: 1rem; }
 
-	/* Spine Visual */
+	/* Spine Visual - Match BookSpreadView styling */
 	.animation-spine {
-		position: absolute;
+		position: absolute; /* Centered in zero-width container */
 		left: 50%;
 		top: 50%;
 		transform: translate(-50%, -50%);
-		width: 40px;
-		height: clamp(400px, 65vh, 700px); /* Initial height */
-		background: linear-gradient(90deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6), rgba(0,0,0,0.4));
-		z-index: 0;
+		width: 30px; /* Match BookSpreadView width */
+		height: clamp(400px, 65vh, 700px); /* Initial height - will animate to match pages */
+		background: linear-gradient(90deg,
+			rgba(0, 0, 0, 0.2) 0%,
+			rgba(0, 0, 0, 0.5) 50%,
+			rgba(0, 0, 0, 0.2) 100%
+		);
+		z-index: 10; /* Match BookSpreadView - appear on top of pages */
 		opacity: 0; /* Fade in when opening */
+		box-shadow:
+			inset 2px 0 4px rgba(0, 0, 0, 0.3),
+			inset -2px 0 4px rgba(0, 0, 0, 0.3);
+		/* Performance */
+		will-change: opacity, height, transform;
+	}
+
+	/* Spine highlight for realism - Match BookSpreadView */
+	.spine-highlight {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 2px;
+		height: 100%;
+		background: linear-gradient(
+			to bottom,
+			transparent 0%,
+			rgba(255, 255, 255, 0.15) 30%,
+			rgba(255, 255, 255, 0.15) 70%,
+			transparent 100%
+		);
 	}
 
 	/* Gradients */
-	.right-gradient { left: 0; width: 40px; background: linear-gradient(to right, rgba(0,0,0,0.1), transparent); top:0; bottom:0; position: absolute; pointer-events: none;}
-	.left-gradient { right: 0; width: 40px; background: linear-gradient(to left, rgba(0,0,0,0.1), transparent); top:0; bottom:0; position: absolute; pointer-events: none; }
+	.right-gradient {
+		left: 0;
+		width: 40px;
+		background: linear-gradient(to right, rgba(0,0,0,0.1), transparent);
+		top: 0;
+		bottom: 0;
+		position: absolute;
+		pointer-events: none;
+	}
 
+	.left-gradient {
+		right: 0;
+		width: 40px;
+		background: linear-gradient(to left, rgba(0,0,0,0.1), transparent);
+		top: 0;
+		bottom: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+
+	/* Mobile Responsive */
+	@media (max-width: 768px) {
+		.animation-container {
+			perspective: 1800px; /* Reduce perspective for smaller screens */
+		}
+
+		.page-content-wrapper {
+			padding: 2rem 1.5rem;
+		}
+
+		.cover-content {
+			padding: 2rem 1.5rem;
+		}
+
+		.animation-spine {
+			width: 30px;
+		}
+	}
+
+	/* Tablet */
+	@media (min-width: 769px) and (max-width: 1024px) {
+		.animation-container {
+			perspective: 2200px;
+		}
+	}
+
+	/* Reduce motion for accessibility */
+	@media (prefers-reduced-motion: reduce) {
+		.animation-book,
+		.book-flipper,
+		.book-right-page {
+			transition: none;
+			animation: none;
+		}
+
+		.animation-spine {
+			transition: opacity 0.3s ease;
+		}
+	}
 </style>

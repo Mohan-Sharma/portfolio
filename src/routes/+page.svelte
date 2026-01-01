@@ -6,12 +6,12 @@
 	 */
 
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
 	import type { PageData } from './$types';
 	import { mapCVDataToBookPages, getCoverData } from '$lib/utils/book-mapper';
 	import BookSpreadView from '$lib/components/book/BookSpreadView.svelte';
 	import ClosedBookView from '$lib/components/book/ClosedBookView.svelte';
 	import BookOpeningAnimation from '$lib/components/book/BookOpeningAnimation.svelte';
+	import BookClosingAnimation from '$lib/components/book/BookClosingAnimation.svelte';
 
 	// Get data from page loader
 	let { data }: { data: PageData } = $props();
@@ -39,8 +39,12 @@
 
 	function handleCloseBook() {
 		if (viewMode !== 'open') return;
-		viewMode = 'closed';
+		viewMode = 'closing';
 		currentPageIndex = 0;
+	}
+
+	function handleClosingComplete() {
+		viewMode = 'closed';
 		scrollListenerActive = true;
 	}
 
@@ -94,11 +98,18 @@
 			pages={bookPages}
 			onComplete={handleAnimationComplete}
 		/>
+	{:else if viewMode === 'closing'}
+		<!-- Closing Animation -->
+		<BookClosingAnimation
+			{coverData}
+			pages={bookPages}
+			onComplete={handleClosingComplete}
+		/>
 	{:else if viewMode === 'closed'}
 		<!-- Closed State -->
 		<ClosedBookView {coverData} onOpen={handleOpenBook} />
 	{:else if viewMode === 'open'}
-		<!-- Open State -->
+		<!-- Open State - Appears on top of animation with higher z-index -->
 		<BookSpreadView
 			pages={bookPages}
 			{currentPageIndex}
