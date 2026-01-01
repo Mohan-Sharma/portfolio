@@ -27,39 +27,35 @@
 	});
 </script>
 
-<div class="h-full bg-gallery dark:bg-void p-6 md:p-8 overflow-hidden flex items-center">
-	<div class="max-w-5xl mx-auto space-y-6 w-full">
+<div class="achievements-page">
+	<div class="content-wrapper">
 		<!-- Header -->
-		<div class="text-center space-y-3">
-			<div class="text-terracotta dark:text-copper text-xs font-mono uppercase tracking-[0.3em]">
-				Chapter Six
-			</div>
-			<h2 class="text-3xl md:text-4xl font-bold text-obsidian-ink dark:text-text-main-dark">
-				Achievements
-			</h2>
-			<div class="w-20 h-1 bg-terracotta dark:bg-copper mx-auto rounded-full"></div>
+		<div class="page-header">
+			<div class="chapter-label">Chapter Six</div>
+			<h2 class="page-title">Achievements</h2>
+			<div class="divider"></div>
 		</div>
 
 		<!-- Achievements by Category -->
-		{#each Object.entries(groupedAchievements()) as [category, achievements]}
-			<div class="space-y-3">
-				<h3 class="text-lg font-bold text-terracotta dark:text-copper flex items-center gap-2">
-					<span class="w-1.5 h-1.5 rounded-full bg-terracotta dark:bg-copper"></span>
+		{#each Object.entries(groupedAchievements()) as [category, achievements], catIndex}
+			<div class="category-section animate-[fadeInUp_0.6s_ease-out_{(catIndex * 0.1)}s_backwards]">
+				<h3 class="category-title">
+					<span class="category-dot"></span>
 					{category}
 				</h3>
 
-				<div class="grid grid-cols-1 gap-3">
+				<div class="achievements-grid">
 					{#each achievements as achievement}
 						<Card variant="bordered" padding="sm">
-							<div class="space-y-2">
+							<div class="achievement-content">
 								<!-- Title and Organization -->
-								<div class="flex flex-wrap items-start justify-between gap-2">
-									<div class="flex-1">
-										<h4 class="text-base font-bold text-obsidian-ink dark:text-text-main-dark mb-0.5">
+								<div class="achievement-header">
+									<div class="achievement-info">
+										<h4 class="achievement-title">
 											{achievement.title}
 										</h4>
 										{#if achievement.organization}
-											<p class="text-xs text-text-sub-light dark:text-steel">
+											<p class="organization-name">
 												{achievement.organization}
 											</p>
 										{/if}
@@ -70,7 +66,7 @@
 								</div>
 
 								<!-- Description -->
-								<p class="text-sm text-text-sub-light dark:text-text-sub-dark leading-relaxed">
+								<p class="achievement-description">
 									{achievement.description}
 								</p>
 							</div>
@@ -81,3 +77,123 @@
 		{/each}
 	</div>
 </div>
+
+<style>
+	.achievements-page {
+		height: 100%;
+		background: transparent; /* Inherit from BookSpreadView theme */
+		padding: 3rem;
+		overflow-y: auto;
+		display: flex;
+		align-items: center;
+	}
+
+	.content-wrapper {
+		max-width: 1200px;
+		margin: 0 auto;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.page-header {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.chapter-label {
+		color: var(--color-accent);
+		font-size: 0.75rem;
+		font-family: monospace;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.3em;
+	}
+
+	.page-title {
+		font-size: clamp(2rem, 5vw, 2.5rem);
+		font-weight: 800;
+		color: var(--color-text-primary);
+	}
+
+	.divider {
+		width: 5rem;
+		height: 0.25rem;
+		background: var(--color-accent);
+		margin: 0 auto;
+		border-radius: 9999px;
+	}
+
+	.category-section {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.category-title {
+		font-size: 1.125rem;
+		font-weight: 700;
+		color: var(--color-accent);
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.category-dot {
+		width: 0.375rem;
+		height: 0.375rem;
+		border-radius: 50%;
+		background: var(--color-accent);
+	}
+
+	.achievements-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 0.75rem;
+	}
+
+	.achievement-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.achievement-header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 0.5rem;
+	}
+
+	.achievement-info {
+		flex: 1;
+	}
+
+	.achievement-title {
+		font-size: 1rem;
+		font-weight: 700;
+		color: var(--color-text-primary);
+		margin-bottom: 0.125rem;
+	}
+
+	.organization-name {
+		font-size: 0.75rem;
+		color: var(--color-text-secondary);
+	}
+
+	.achievement-description {
+		font-size: 0.875rem;
+		color: var(--color-text-secondary);
+		line-height: 1.6;
+	}
+
+	@media (max-width: 768px) {
+		.achievements-page {
+			padding: 2rem 1.5rem;
+		}
+	}
+</style>

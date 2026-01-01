@@ -263,7 +263,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		/* Light Mode: Clean light background */
+		background: linear-gradient(135deg, #FBFBFA 0%, #f0f0f5 100%);
 		perspective: 2500px;
 		perspective-origin: center 50%;
 		z-index: 1000;
@@ -273,7 +274,8 @@
 	}
 
 	:global(.dark) .animation-container {
-		background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+		/* Dark Mode: Deep dark background - NO cyan/greenish */
+		background: linear-gradient(135deg, #040508 0%, #0a0a0f 50%, #040508 100%);
 	}
 
 	.animation-book {
@@ -304,7 +306,7 @@
 
 	:global(.dark) .book-right-page,
 	:global(.dark) .book-flipper .flipper-back {
-		background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 50%, rgba(35, 40, 55, 0.95) 100%);
 	}
 
 	.book-right-page {
@@ -340,7 +342,7 @@
 	}
 
 	:global(.dark) .flipper-front {
-		background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 50%, rgba(35, 40, 55, 0.95) 100%);
 	}
 
 	.cover-design {
@@ -357,7 +359,7 @@
 	}
 
 	:global(.dark) .flipper-back {
-		background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 50%, rgba(35, 40, 55, 0.95) 100%);
 	}
 
 	.page-content-wrapper {
@@ -409,29 +411,21 @@
 	.cover-divider {
 		width: 5rem;
 		height: 3px;
-		background: linear-gradient(to right, transparent, #a64b35, transparent);
+		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
 		margin: 1rem auto;
-	}
-	:global(.dark) .cover-divider {
-		background: linear-gradient(to right, transparent, #e27d60, transparent);
 	}
 
 	.decoration-line {
 		height: 2px;
 		width: 3rem;
-		background: linear-gradient(to right, transparent, #a64b35, transparent);
+		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
 	}
-	:global(.dark) .decoration-line {
-		background: linear-gradient(to right, transparent, #e27d60, transparent);
-	}
+
 	.decoration-dot {
 		width: 6px;
 		height: 6px;
 		border-radius: 50%;
-		background: #a64b35;
-	}
-	:global(.dark) .decoration-dot {
-		background: #e27d60;
+		background: var(--color-accent);
 	}
 	.cover-decoration {
 		display: flex;

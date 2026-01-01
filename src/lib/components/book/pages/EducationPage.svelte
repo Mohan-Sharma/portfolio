@@ -63,7 +63,7 @@
 <style>
 	.education-page {
 		height: 100%;
-		background: linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0f0f23 100%);
+		background: transparent; /* Inherit from BookSpreadView theme */
 		padding: 3rem;
 		overflow-y: auto;
 	}
@@ -85,18 +85,18 @@
 	}
 
 	.education-item {
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(226, 125, 96, 0.2);
+		background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
 		border-radius: 0.75rem;
 		padding: 2rem;
 		transition: all 0.3s ease;
 	}
 
 	.education-item:hover {
-		background: rgba(255, 255, 255, 0.05);
-		border-color: rgba(226, 125, 96, 0.4);
+		background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+		border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
 		transform: translateX(8px);
-		box-shadow: 0 8px 24px rgba(226, 125, 96, 0.15);
+		box-shadow: 0 8px 24px color-mix(in srgb, var(--color-accent) 15%, transparent);
 	}
 
 	.education-content {
@@ -110,11 +110,11 @@
 		width: 3.5rem;
 		height: 3.5rem;
 		border-radius: 50%;
-		background: linear-gradient(135deg, #e27d60, #a64b35);
+		background: var(--color-accent);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		box-shadow: 0 4px 16px rgba(226, 125, 96, 0.3);
+		box-shadow: 0 4px 16px color-mix(in srgb, var(--color-accent) 30%, transparent);
 	}
 
 	.icon {
@@ -133,20 +133,20 @@
 	.degree-title {
 		font-size: 1.25rem;
 		font-weight: 700;
-		color: #e6e9ef;
+		color: var(--color-text-primary);
 		line-height: 1.4;
 	}
 
 	.field-name {
 		font-size: 1rem;
 		font-weight: 600;
-		color: #e27d60;
+		color: var(--color-accent);
 		line-height: 1.5;
 	}
 
 	.institution-name {
 		font-size: 0.9375rem;
-		color: rgba(230, 233, 239, 0.8);
+		color: var(--color-text-secondary);
 		line-height: 1.6;
 	}
 
@@ -154,7 +154,7 @@
 		font-size: 0.875rem;
 		font-weight: 600;
 		font-family: monospace;
-		color: rgba(226, 125, 96, 0.8);
+		color: color-mix(in srgb, var(--color-accent) 80%, transparent);
 	}
 
 	@media (max-width: 768px) {

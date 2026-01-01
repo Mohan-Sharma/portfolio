@@ -69,7 +69,7 @@
 <style>
 	.toc-page {
 		height: 100%;
-		background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+		background: transparent; /* Inherit from BookSpreadView theme */
 		padding: 3rem 2rem;
 		overflow-y: auto;
 	}
@@ -93,7 +93,7 @@
 	.toc-title {
 		font-size: clamp(2.5rem, 5vw, 3.5rem);
 		font-weight: 800;
-		color: #e6e9ef;
+		color: var(--color-text-primary);
 		line-height: 1.2;
 	}
 
@@ -107,15 +107,15 @@
 	.decoration-line {
 		height: 2px;
 		width: 4rem;
-		background: linear-gradient(to right, transparent, #e27d60, transparent);
+		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
 	}
 
 	.decoration-dot {
 		width: 6px;
 		height: 6px;
 		border-radius: 50%;
-		background: #e27d60;
-		box-shadow: 0 0 10px rgba(226, 125, 96, 0.5);
+		background: var(--color-accent);
+		box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 50%, transparent);
 	}
 
 	.spacer {
@@ -136,18 +136,18 @@
 		justify-content: space-between;
 		gap: 1rem;
 		padding: 1rem 1.5rem;
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(226, 125, 96, 0.2);
+		background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
 		border-radius: 0.75rem;
 		cursor: pointer;
 		transition: all 0.3s ease;
 	}
 
 	.chapter-button:hover {
-		background: rgba(255, 255, 255, 0.05);
-		border-color: rgba(226, 125, 96, 0.4);
+		background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+		border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
 		transform: translateX(8px);
-		box-shadow: 0 4px 16px rgba(226, 125, 96, 0.15);
+		box-shadow: 0 4px 16px color-mix(in srgb, var(--color-accent) 15%, transparent);
 	}
 
 	.chapter-info {
@@ -164,18 +164,18 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: linear-gradient(135deg, #e27d60, #a64b35);
+		background: var(--color-accent);
 		border-radius: 50%;
 		font-size: 0.875rem;
 		font-weight: 700;
 		color: white;
-		box-shadow: 0 4px 12px rgba(226, 125, 96, 0.3);
+		box-shadow: 0 4px 12px color-mix(in srgb, var(--color-accent) 30%, transparent);
 	}
 
 	.chapter-title {
 		font-size: 1.125rem;
 		font-weight: 600;
-		color: #e6e9ef;
+		color: var(--color-text-primary);
 		line-height: 1.4;
 	}
 
@@ -189,7 +189,7 @@
 	.dotted-line {
 		width: 3rem;
 		height: 2px;
-		background-image: linear-gradient(to right, rgba(226, 125, 96, 0.3) 50%, transparent 50%);
+		background-image: linear-gradient(to right, color-mix(in srgb, var(--color-accent) 30%, transparent) 50%, transparent 50%);
 		background-size: 8px 2px;
 	}
 
@@ -197,7 +197,7 @@
 		font-size: 0.875rem;
 		font-weight: 600;
 		font-family: monospace;
-		color: #e27d60;
+		color: var(--color-accent);
 		min-width: 2rem;
 		text-align: right;
 	}
@@ -205,11 +205,11 @@
 	.footer-note {
 		margin-top: 2rem;
 		padding-top: 1.5rem;
-		border-top: 1px solid rgba(226, 125, 96, 0.2);
+		border-top: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
 		text-align: center;
 		font-size: 0.875rem;
 		font-style: italic;
-		color: rgba(230, 233, 239, 0.6);
+		color: var(--color-text-secondary);
 	}
 
 	@media (max-width: 768px) {

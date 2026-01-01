@@ -12,6 +12,6 @@
 <style>
 	.blank-page {
 		height: 100%;
-		background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+		background: transparent; /* Inherit from BookSpreadView theme */
 	}
 </style>

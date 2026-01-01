@@ -325,7 +325,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		/* Light Mode: Clean light background */
+		background: linear-gradient(135deg, #FBFBFA 0%, #f0f0f5 100%);
 		perspective: 2500px; /* Strong perspective for 3D feel */
 		perspective-origin: center 50%;
 		z-index: 1000;
@@ -336,7 +337,8 @@
 	}
 
 	:global(.dark) .animation-container {
-		background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+		/* Dark Mode: Deep dark background - NO cyan */
+		background: linear-gradient(135deg, #040508 0%, #0a0a0f 50%, #040508 100%);
 	}
 
 	/* The Book Container - Holds the Spine Axis */
@@ -370,9 +372,11 @@
 		-webkit-backface-visibility: hidden;
 	}
 
-	:global(.dark) .book-right-page, 
+	:global(.dark) .book-right-page,
 	:global(.dark) .book-flipper .flipper-back {
-		background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 30%, rgba(35, 40, 55, 0.95) 60%, rgba(25, 30, 40, 0.95) 100%);
+		backdrop-filter: blur(25px) saturate(180%);
+		-webkit-backdrop-filter: blur(25px) saturate(180%);
 	}
 
 	/* RIGHT PAGE: Anchored LEFT (Spine), Grows RIGHT */
@@ -420,7 +424,9 @@
 	}
 	
 	:global(.dark) .flipper-front {
-		background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 30%, rgba(35, 40, 55, 0.95) 60%, rgba(25, 30, 40, 0.95) 100%);
+		backdrop-filter: blur(25px) saturate(180%);
+		-webkit-backdrop-filter: blur(25px) saturate(180%);
 	}
 
 	.cover-design {
@@ -438,7 +444,9 @@
 	}
 	
 	:global(.dark) .flipper-back {
-		background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 30%, rgba(35, 40, 55, 0.95) 60%, rgba(25, 30, 40, 0.95) 100%);
+		backdrop-filter: blur(25px) saturate(180%);
+		-webkit-backdrop-filter: blur(25px) saturate(180%);
 	}
 
 	/* Content Internal */
@@ -457,27 +465,21 @@
 		flex-direction: column;
 		justify-content: space-between;
 		padding: 3rem 2rem;
-		border: 2px solid rgba(0,0,0,0.1);
+		border: 2px solid var(--color-border);
 		border-left: none; /* Spine side */
 	}
 
 	/* Copy Cover Styles for fidelity... */
-	.cover-name { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: #1c1c1e; text-align: center; }
-	:global(.dark) .cover-name { color: #e6e9ef; }
-	.cover-title { font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 600; color: #a64b35; text-align: center; }
-	:global(.dark) .cover-title { color: #e27d60; }
-	.cover-tagline { font-size: 0.875rem; color: #636366; text-align: center; font-style: italic; }
-	:global(.dark) .cover-tagline { color: #8e8e93; }
-	
+	.cover-name { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--color-text-primary); text-align: center; }
+	.cover-title { font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 600; color: var(--color-accent); text-align: center; }
+	.cover-tagline { font-size: 0.875rem; color: var(--color-text-secondary); text-align: center; font-style: italic; }
+
 	.cover-divider {
-		width: 5rem; height: 3px; background: linear-gradient(to right, transparent, #a64b35, transparent); margin: 1rem auto;
+		width: 5rem; height: 3px; background: linear-gradient(to right, transparent, var(--color-accent), transparent); margin: 1rem auto;
 	}
-	:global(.dark) .cover-divider { background: linear-gradient(to right, transparent, #e27d60, transparent); }
-	
-	.decoration-line { height: 2px; width: 3rem; background: linear-gradient(to right, transparent, #a64b35, transparent); }
-	:global(.dark) .decoration-line { background: linear-gradient(to right, transparent, #e27d60, transparent); }
-	.decoration-dot { width: 6px; height: 6px; border-radius: 50%; background: #a64b35; }
-	:global(.dark) .decoration-dot { background: #e27d60; }
+
+	.decoration-line { height: 2px; width: 3rem; background: linear-gradient(to right, transparent, var(--color-accent), transparent); }
+	.decoration-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); }
 	.cover-decoration { display: flex; align-items: center; justify-content: center; gap: 1rem; }
 
 	/* Spine Visual - Match BookSpreadView styling */

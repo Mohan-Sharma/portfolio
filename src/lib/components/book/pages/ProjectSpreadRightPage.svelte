@@ -66,7 +66,7 @@
 <style>
 	.project-right-page {
 		height: 100%;
-		background: linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0f0f23 100%);
+		background: transparent; /* Inherit from BookSpreadView theme */
 		padding: 3rem;
 		overflow-y: auto;
 	}
@@ -93,7 +93,7 @@
 		font-weight: 700;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		color: #e27d60;
+		color: var(--color-accent);
 	}
 
 	.section-icon {
@@ -104,7 +104,7 @@
 	.description {
 		font-size: 1rem;
 		line-height: 1.8;
-		color: rgba(230, 233, 239, 0.9);
+		color: var(--color-text-secondary);
 	}
 
 	.tech-stack {
@@ -116,17 +116,17 @@
 	.tech-badge {
 		font-size: 0.875rem;
 		font-weight: 600;
-		color: #e6e9ef;
-		background: rgba(226, 125, 96, 0.15);
+		color: var(--color-text-primary);
+		background: color-mix(in srgb, var(--color-accent) 15%, transparent);
 		padding: 0.5rem 1rem;
 		border-radius: 0.5rem;
-		border: 1px solid rgba(226, 125, 96, 0.3);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
 		transition: all 0.2s ease;
 	}
 
 	.tech-badge:hover {
-		background: rgba(226, 125, 96, 0.25);
-		border-color: rgba(226, 125, 96, 0.5);
+		background: color-mix(in srgb, var(--color-accent) 25%, transparent);
+		border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
 	}
 
 	.highlights-list {
@@ -144,7 +144,7 @@
 		gap: 1rem;
 		font-size: 0.9375rem;
 		line-height: 1.7;
-		color: rgba(230, 233, 239, 0.85);
+		color: var(--color-text-secondary);
 	}
 
 	.highlight-dot {
@@ -152,9 +152,9 @@
 		width: 8px;
 		height: 8px;
 		border-radius: 50%;
-		background: #e27d60;
+		background: var(--color-accent);
 		margin-top: 0.5rem;
-		box-shadow: 0 0 8px rgba(226, 125, 96, 0.4);
+		box-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 40%, transparent);
 	}
 
 	@media (max-width: 768px) {

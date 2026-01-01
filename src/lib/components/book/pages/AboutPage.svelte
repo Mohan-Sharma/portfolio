@@ -58,7 +58,7 @@
 <style>
 	.about-page {
 		height: 100%;
-		background: linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0f0f23 100%);
+		background: transparent; /* Inherit from BookSpreadView theme */
 		padding: 3rem;
 		overflow-y: auto;
 	}

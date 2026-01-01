@@ -88,7 +88,7 @@
 <style>
 	.contact-page {
 		height: 100%;
-		background: linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0f0f23 100%);
+		background: transparent; /* Inherit from BookSpreadView theme */
 		padding: 3rem;
 		overflow-y: auto;
 	}
@@ -110,8 +110,8 @@
 	}
 
 	.contact-card {
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(226, 125, 96, 0.2);
+		background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
 		border-radius: 0.75rem;
 		padding: 2rem;
 		display: flex;
@@ -123,10 +123,10 @@
 	}
 
 	.contact-card:hover {
-		background: rgba(255, 255, 255, 0.05);
-		border-color: rgba(226, 125, 96, 0.4);
+		background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+		border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
 		transform: translateY(-4px);
-		box-shadow: 0 8px 24px rgba(226, 125, 96, 0.15);
+		box-shadow: 0 8px 24px color-mix(in srgb, var(--color-accent) 15%, transparent);
 	}
 
 	.card-icon {
@@ -136,7 +136,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		box-shadow: 0 4px 16px rgba(226, 125, 96, 0.3);
+		box-shadow: 0 4px 16px color-mix(in srgb, var(--color-accent) 30%, transparent);
 	}
 
 	.card-icon svg {
@@ -146,11 +146,11 @@
 	}
 
 	.email-icon {
-		background: linear-gradient(135deg, #e27d60, #a64b35);
+		background: var(--color-accent);
 	}
 
 	.phone-icon {
-		background: linear-gradient(135deg, #a64b35, #7a3828);
+		background: var(--color-accent);
 	}
 
 	.card-content {
@@ -164,26 +164,26 @@
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		color: rgba(230, 233, 239, 0.7);
+		color: var(--color-text-secondary);
 	}
 
 	.contact-link {
 		font-size: 1rem;
 		font-weight: 600;
-		color: #e27d60;
+		color: var(--color-accent);
 		text-decoration: none;
 		transition: all 0.2s ease;
 		word-break: break-all;
 	}
 
 	.contact-link:hover {
-		color: #c55a40;
+		opacity: 0.8;
 		text-decoration: underline;
 	}
 
 	.social-section {
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(226, 125, 96, 0.2);
+		background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
 		border-radius: 0.75rem;
 		padding: 2rem;
 		text-align: center;
@@ -192,7 +192,7 @@
 	.social-title {
 		font-size: 1.125rem;
 		font-weight: 700;
-		color: #e6e9ef;
+		color: var(--color-text-primary);
 		margin-bottom: 1.5rem;
 	}
 
@@ -210,7 +210,7 @@
 		align-items: center;
 		gap: 0.75rem;
 		padding: 1rem 2rem;
-		background: linear-gradient(135deg, #e27d60, #a64b35);
+		background: var(--color-accent);
 		color: white;
 		font-size: 1rem;
 		font-weight: 700;
@@ -218,13 +218,13 @@
 		border-radius: 0.75rem;
 		cursor: pointer;
 		transition: all 0.3s ease;
-		box-shadow: 0 4px 16px rgba(226, 125, 96, 0.4);
+		box-shadow: 0 4px 16px color-mix(in srgb, var(--color-accent) 40%, transparent);
 	}
 
 	.download-button:hover {
-		background: linear-gradient(135deg, #c55a40, #8a3f2e);
+		background: color-mix(in srgb, var(--color-accent) 85%, black);
 		transform: translateY(-2px);
-		box-shadow: 0 6px 24px rgba(226, 125, 96, 0.5);
+		box-shadow: 0 6px 24px color-mix(in srgb, var(--color-accent) 50%, transparent);
 	}
 
 	.download-icon {

@@ -1,32 +1,45 @@
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-	darkMode: 'class', // Enable class-based dark mode
+	darkMode: 'class', // Critical for SvelteKit theme toggling
 	theme: {
 		extend: {
-			colors: {
-				// 🌑 Dark Mode: "Anodized Obsidian" - Deep blacks with burnt metal accents
-				'void': '#08080a', // Darkest neutral (background)
-				'surface': '#141418', // Cards/surfaces (solid, use with opacity in classes)
-				'copper': '#e27d60', // Warm accent (primary CTA)
-				'steel': '#8e8e93', // Neutral gray (text/borders)
-				'amber': '#FFB347', // Highlight accent
-				'text-main-dark': '#e6e9ef', // Main text in dark mode
-				'text-sub-dark': '#8e8e93', // Secondary text in dark mode
-
-				// ☀️ Light Mode: "Liquid Pearl" - High-chroma neutrals, art gallery feel
-				'gallery': '#f2f2f7', // Background (light)
-				'mercury': '#e5e5ea', // Cards/surfaces (solid, use with opacity in classes)
-				'terracotta': '#a64b35', // Warm accent (light mode primary)
-				'obsidian-ink': '#1c1c1e', // Text (light mode)
-				'text-sub-light': '#636366', // Secondary text in light mode
-				'sage': '#88B04B' // Soft green accent
-			},
 			fontFamily: {
+				// Aptos first for Microsoft 365 users, falling back to Inter
 				sans: ['Aptos', 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif']
 			},
+			colors: {
+				// Modern CSS Variable-based colors (mapped from app.css)
+				background: 'hsl(var(--bg-main))',
+				primary: 'hsl(var(--text-primary))',
+				secondary: 'hsl(var(--text-secondary))',
+				accent: {
+					DEFAULT: 'hsl(var(--accent))',
+					foreground: 'hsl(var(--accent-foreground))'
+				},
+
+				// Legacy color names for backwards compatibility
+				// 🌑 Dark Mode: "Ethereal Obsidian"
+				'void': '#040508', // Dark background
+				'surface': '#0D0F16', // Dark cards/surfaces
+				'copper': '#e27d60', // Anodized Copper (original orange)
+				'steel': '#94A3B8', // Subdued gray
+				'text-main-dark': '#F8FAFC', // Main text in dark mode
+				'text-sub-dark': '#94A3B8', // Secondary text in dark mode
+
+				// ☀️ Light Mode: "Sun-Bleached Silk"
+				'gallery': '#FBFBFA', // Light background
+				'mercury': '#FFFFFF', // Light cards/surfaces
+				'terracotta': '#a64b35', // Deep Terracotta (original orange)
+				'obsidian-ink': '#0F172A', // Text (light mode)
+				'text-sub-light': '#64748B', // Secondary text in light mode
+				'amber': '#e27d60' // Orange accent
+			},
+			backgroundImage: {
+				'ethereal-gradient': 'radial-gradient(circle at 50% 50%, hsl(var(--accent) / 0.15), transparent 60%)'
+			},
 			backdropBlur: {
-				'chrome': '25px' // Changed from 20px to match HTML reference
+				'chrome': '30px' // Increased for enhanced glassmorphism
 			},
 			keyframes: {
 				fadeInScale: {

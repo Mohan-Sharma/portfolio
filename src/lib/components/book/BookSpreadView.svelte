@@ -20,7 +20,7 @@
 		onClose?: () => void; // Keep for ESC key and scroll up functionality
 	}
 
-	let { pages, currentPageIndex, onPageChange, onClose }: Props = $props();
+	let { pages, currentPageIndex, onPageChange }: Props = $props();
 
 	// Navigate to Table of Contents (page 0)
 	function handleGoToIndex() {
@@ -45,8 +45,12 @@
 	let isAnimating = $state(false);
 	let previousIndex = $state(0);
 	let isInitialized = $state(false);
-	let contentOpacity = $state(1); // Controls visibility of page content during transitions
-	let displayedPageIndex = $state(0); // The page index actually shown (lags behind currentPageIndex during animation)
+
+	// Track left and right pages independently for smooth animations
+	let displayedLeftIndex = $state(0); // Left page index
+	let displayedRightIndex = $state(1); // Right page index
+	let rightPageBlur = $state(0); // Blur for right page during animation (0 = clear, 10 = max blur)
+	let leftPageBlur = $state(0); // Blur for left page during animation
 
 	// Watch for external page changes and animate
 	$effect(() => {
@@ -55,7 +59,8 @@
 		// Initialize on first run
 		if (!isInitialized) {
 			previousIndex = current;
-			displayedPageIndex = current;
+			displayedLeftIndex = Math.floor(current / 2) * 2;
+			displayedRightIndex = displayedLeftIndex + 1;
 			isInitialized = true;
 			return;
 		}
@@ -71,23 +76,16 @@
 		if (isAnimating || !bookSpreadElement) return;
 		isAnimating = true;
 
-		// Fade out current content smoothly
-		await gsap.to({}, {
-			duration: 0.2,
-			onUpdate: function() {
-				contentOpacity = 1 - this.progress();
-			}
-		});
-
-		// Create a turning page element with CURRENT visible content
+		// Step 1: Capture the turning page content BEFORE any state changes
 		const turningPage = document.createElement('div');
 		turningPage.className = 'turning-page';
 
-		// Copy content from the page that's turning (BEFORE updating displayedPageIndex)
 		if (direction === 'next' && rightPageElement) {
+			// Turning right page (page 2) to reveal left page of new spread (page 3)
 			turningPage.innerHTML = rightPageElement.innerHTML;
 			turningPage.classList.add('turn-right-to-left');
 		} else if (direction === 'prev' && leftPageElement) {
+			// Turning left page back to reveal right page of previous spread
 			turningPage.innerHTML = leftPageElement.innerHTML;
 			turningPage.classList.add('turn-left-to-right');
 		}
@@ -95,9 +93,14 @@
 		bookSpreadElement.appendChild(turningPage);
 		turningPageElement = turningPage;
 
-		// NOW update the displayed page index - this will update the underlying pages
-		// while the turning page animation plays over them
-		displayedPageIndex = currentPageIndex;
+		// Step 2: Blur ONLY the page that's about to be turned (stationary page stays clear!)
+		if (direction === 'next') {
+			// Turning right page - blur it immediately, left page stays clear
+			rightPageBlur = 20;
+		} else {
+			// Turning left page - blur it immediately, right page stays clear
+			leftPageBlur = 20;
+		}
 
 		// Enhanced page turn animation with curl effect
 		const timeline = gsap.timeline();
@@ -174,23 +177,49 @@
 			);
 		}
 
-		// Wait for the page turn to complete
+		// Step 3: Wait for the page turn to complete
 		await timeline;
 
-		// Remove the turning page element
+		// Step 4: Remove the turning page element
 		if (turningPageElement) {
 			turningPageElement.remove();
 			turningPageElement = null;
 		}
 
-		// Fade in new content smoothly
+		// Step 5: Now blur the stationary page too, before updating content
+		if (direction === 'next') {
+			// Left page was clear, now blur it before updating
+			leftPageBlur = 20;
+		} else {
+			// Right page was clear, now blur it before updating
+			rightPageBlur = 20;
+		}
+
+		// Give a moment for blur to apply
+		await new Promise(resolve => setTimeout(resolve, 50));
+
+		// Step 6: Update BOTH pages to final positions (both are blurred now, so swap is invisible)
+		const finalLeftIndex = Math.floor(currentPageIndex / 2) * 2;
+		const finalRightIndex = finalLeftIndex + 1;
+		displayedLeftIndex = finalLeftIndex;
+		displayedRightIndex = finalRightIndex;
+
+		// Step 7: Smoothly unblur BOTH pages together to reveal pages 3-4
 		await gsap.to({}, {
-			duration: 0.3,
-			ease: 'power2.out',
+			duration: 0.5, // Quick but smooth transition - easy on eyes
+			ease: 'power2.out', // Quick start, smooth end
 			onUpdate: function() {
-				contentOpacity = this.progress();
+				const progress = this.progress();
+				// Reduce blur from 20 to 0 on BOTH pages
+				const currentBlur = 20 * (1 - progress);
+				leftPageBlur = currentBlur;
+				rightPageBlur = currentBlur;
 			}
 		});
+
+		// Ensure blur is completely removed
+		rightPageBlur = 0;
+		leftPageBlur = 0;
 
 		isAnimating = false;
 	}
@@ -243,11 +272,9 @@
 		};
 	});
 
-	// Get current spread pages - use displayedPageIndex to prevent premature content updates
-	const leftPageIndex = $derived(Math.floor(displayedPageIndex / 2) * 2);
-	const rightPageIndex = $derived(leftPageIndex + 1);
-	const leftPage = $derived(pages[leftPageIndex]);
-	const rightPage = $derived(pages[rightPageIndex]);
+	// Get current spread pages using independent left/right indices
+	const leftPage = $derived(pages[displayedLeftIndex]);
+	const rightPage = $derived(pages[displayedRightIndex]);
 
 	// Get page theme colors
 	function getPageTheme(page: BookPage | undefined) {
@@ -295,10 +322,10 @@
 		</button>
 	{/if}
 
-	<!-- Page indicator - use currentPageIndex for accurate display -->
+	<!-- Page indicator -->
 	{#if leftPage && leftPage.content.type !== 'cover'}
 		<div class="page-indicator">
-			<span>Pages {Math.floor(currentPageIndex / 2) * 2 + 1}-{Math.min(Math.floor(currentPageIndex / 2) * 2 + 2, pages.length)} of {pages.length}</span>
+			<span>Pages {displayedLeftIndex + 1}-{Math.min(displayedRightIndex + 1, pages.length)} of {pages.length}</span>
 		</div>
 	{/if}
 
@@ -336,7 +363,7 @@
 		<div
 			bind:this={leftPageElement}
 			class="book-page left-page {getPageTheme(leftPage)}"
-			style="opacity: {contentOpacity}; transition: opacity 0.25s ease-out;"
+			style="filter: blur({leftPageBlur}px); will-change: filter;"
 			role="article"
 			aria-label="Left page: {leftPage?.title || 'Empty'}"
 		>
@@ -348,7 +375,7 @@
 
 			<!-- Page number bottom-left -->
 			{#if leftPage && leftPage.content.type !== 'cover'}
-				<div class="page-number left">{leftPageIndex + 1}</div>
+				<div class="page-number left">{displayedLeftIndex + 1}</div>
 			{/if}
 
 			<!-- Subtle page gradient overlay -->
@@ -364,7 +391,7 @@
 		<div
 			bind:this={rightPageElement}
 			class="book-page right-page {getPageTheme(rightPage)}"
-			style="opacity: {contentOpacity}; transition: opacity 0.25s ease-out;"
+			style="filter: blur({rightPageBlur}px); will-change: filter;"
 			role="article"
 			aria-label="Right page: {rightPage?.title || 'End'}"
 		>
@@ -391,7 +418,7 @@
 
 			<!-- Page number bottom-right -->
 			{#if rightPage}
-				<div class="page-number right">{rightPageIndex + 1}</div>
+				<div class="page-number right">{displayedRightIndex + 1}</div>
 			{/if}
 
 			<!-- Subtle page gradient overlay -->
@@ -414,9 +441,9 @@
 		</button>
 
 		<div class="page-counter">
-			<span class="current">{Math.floor(currentPageIndex / 2) * 2 + 1}</span>
+			<span class="current">{displayedLeftIndex + 1}</span>
 			<span class="separator">-</span>
-			<span class="current">{Math.min(Math.floor(currentPageIndex / 2) * 2 + 2, pages.length)}</span>
+			<span class="current">{Math.min(displayedRightIndex + 1, pages.length)}</span>
 			<span class="separator">/</span>
 			<span class="total">{pages.length}</span>
 		</div>
@@ -451,12 +478,14 @@
 
 		position: relative;
 		overflow: hidden;
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		/* Light Mode: Clean light background */
+		background: linear-gradient(135deg, #FBFBFA 0%, #f0f0f5 100%);
 		z-index: 1001; /* Above BookOpeningAnimation (z-index: 1000) */
 	}
 
 	:global(.dark) .book-container {
-		background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+		/* Dark Mode: Deep dark background - NO cyan/greenish */
+		background: linear-gradient(135deg, #040508 0%, #0a0a0f 50%, #040508 100%);
 	}
 
 	/* Table of Contents Navigation Button - Book-like design */
@@ -470,21 +499,21 @@
 		align-items: center;
 		gap: 0.5rem;
 		padding: 1rem;
-		background: rgba(226, 125, 96, 0.15);
+		background: color-mix(in srgb, hsl(var(--accent)) 15%, transparent);
 		backdrop-filter: blur(12px) saturate(150%);
-		border: 2px solid rgba(226, 125, 96, 0.3);
+		border: 2px solid color-mix(in srgb, hsl(var(--accent)) 30%, transparent);
 		border-radius: 0.75rem;
-		color: #e27d60;
+		color: hsl(var(--accent));
 		cursor: pointer;
 		transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-		box-shadow: 0 4px 16px rgba(226, 125, 96, 0.2);
+		box-shadow: 0 4px 16px color-mix(in srgb, hsl(var(--accent)) 20%, transparent);
 	}
 
 	.toc-nav-button:hover {
-		background: rgba(226, 125, 96, 0.25);
-		border-color: rgba(226, 125, 96, 0.5);
+		background: color-mix(in srgb, hsl(var(--accent)) 25%, transparent);
+		border-color: color-mix(in srgb, hsl(var(--accent)) 50%, transparent);
 		transform: translateY(-4px) scale(1.05);
-		box-shadow: 0 8px 24px rgba(226, 125, 96, 0.35);
+		box-shadow: 0 8px 24px color-mix(in srgb, hsl(var(--accent)) 35%, transparent);
 	}
 
 	.toc-nav-button .icon {
@@ -498,17 +527,16 @@
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
-		color: #e27d60;
 	}
 
 	:global(.dark) .toc-nav-button {
-		background: rgba(226, 125, 96, 0.12);
-		border-color: rgba(226, 125, 96, 0.25);
+		background: color-mix(in srgb, hsl(var(--accent)) 12%, transparent);
+		border-color: color-mix(in srgb, hsl(var(--accent)) 25%, transparent);
 	}
 
 	:global(.dark) .toc-nav-button:hover {
-		background: rgba(226, 125, 96, 0.2);
-		border-color: rgba(226, 125, 96, 0.4);
+		background: color-mix(in srgb, hsl(var(--accent)) 20%, transparent);
+		border-color: color-mix(in srgb, hsl(var(--accent)) 40%, transparent);
 	}
 
 	.page-indicator {
@@ -547,6 +575,10 @@
 
 		/* Smooth GPU-accelerated transitions */
 		transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+		/* Rounded corners to match page edges */
+		border-radius: 1rem;
+		overflow: hidden; /* Ensure children respect rounded corners */
 
 		box-shadow:
 			0 60px 120px rgba(0, 0, 0, 0.5),
@@ -750,7 +782,13 @@
 	:global(.dark) .theme-achievements,
 	:global(.dark) .theme-contact,
 	:global(.dark) .theme-default {
-		background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.95) 100%);
+		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 30%, rgba(35, 40, 55, 0.95) 60%, rgba(25, 30, 40, 0.95) 100%);
+		backdrop-filter: blur(25px) saturate(180%);
+		-webkit-backdrop-filter: blur(25px) saturate(180%);
+		border: 1px solid rgba(142, 142, 147, 0.15);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.05),
+			0 8px 32px rgba(0, 0, 0, 0.3);
 	}
 
 	.page-number {
@@ -791,7 +829,13 @@
 	}
 
 	:global(.dark) :global(.turning-page) {
-		background: linear-gradient(135deg, rgba(17, 24, 39, 0.98) 0%, rgba(31, 41, 55, 0.98) 100%);
+		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 30%, rgba(35, 40, 55, 0.95) 60%, rgba(25, 30, 40, 0.95) 100%);
+		backdrop-filter: blur(25px) saturate(180%);
+		-webkit-backdrop-filter: blur(25px) saturate(180%);
+		border: 1px solid rgba(142, 142, 147, 0.15);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.05),
+			0 0 40px rgba(0, 0, 0, 0.3);
 	}
 
 	:global(.turning-page.turn-right-to-left) {
@@ -822,7 +866,7 @@
 	:global(.dark) :global(.turning-page.turn-left-to-right) {
 		background-image:
 			linear-gradient(to right, rgba(0,0,0,0.2) 0%, transparent 5%),
-			linear-gradient(135deg, rgba(17, 24, 39, 0.98) 0%, rgba(31, 41, 55, 0.98) 100%);
+			linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 30%, rgba(35, 40, 55, 0.95) 60%, rgba(25, 30, 40, 0.95) 100%);
 	}
 
 	.end-page {
@@ -843,20 +887,20 @@
 		z-index: 100;
 		display: flex;
 		align-items: center;
-		gap: 2.5rem;
-		padding: 1rem 2.5rem;
-		background: rgba(255, 255, 255, 0.12);
+		gap: 2rem;
+		padding: 1rem 2rem;
+		background: rgba(0, 0, 0, 0.3);
 		backdrop-filter: blur(16px) saturate(180%);
-		border-radius: 9999px;
-		border: 1px solid rgba(255, 255, 255, 0.18);
+		border-radius: 1.5rem;
+		border: 1px solid rgba(255, 255, 255, 0.1);
 		box-shadow:
 			0 8px 32px rgba(0, 0, 0, 0.25),
-			inset 0 1px 0 rgba(255, 255, 255, 0.15);
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	}
 
 	:global(.dark) .navigation-controls {
 		background: rgba(0, 0, 0, 0.5);
-		border-color: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255, 255, 255, 0.08);
 	}
 
 	.nav-button {
@@ -864,26 +908,40 @@
 		align-items: center;
 		gap: 0.75rem;
 		padding: 0.875rem 1.75rem;
-		background: rgba(255, 255, 255, 0.2);
-		border: none;
-		border-radius: 9999px;
-		color: #ffffff;
+		background: color-mix(in srgb, hsl(var(--accent)) 15%, transparent);
+		backdrop-filter: blur(12px) saturate(150%);
+		border: 2px solid color-mix(in srgb, hsl(var(--accent)) 30%, transparent);
+		border-radius: 0.75rem;
+		color: hsl(var(--accent));
 		font-weight: 700;
 		font-size: 0.875rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
 		cursor: pointer;
-		transition: all 0.3s ease;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+		box-shadow: 0 4px 16px color-mix(in srgb, hsl(var(--accent)) 20%, transparent);
 	}
 
 	.nav-button:hover:not(:disabled) {
-		background: rgba(255, 255, 255, 0.3);
-		transform: translateY(-3px);
-		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+		background: color-mix(in srgb, hsl(var(--accent)) 25%, transparent);
+		border-color: color-mix(in srgb, hsl(var(--accent)) 50%, transparent);
+		transform: translateY(-4px) scale(1.05);
+		box-shadow: 0 8px 24px color-mix(in srgb, hsl(var(--accent)) 35%, transparent);
 	}
 
 	.nav-button:disabled {
 		opacity: 0.3;
 		cursor: not-allowed;
+	}
+
+	:global(.dark) .nav-button {
+		background: color-mix(in srgb, hsl(var(--accent)) 12%, transparent);
+		border-color: color-mix(in srgb, hsl(var(--accent)) 25%, transparent);
+	}
+
+	:global(.dark) .nav-button:hover:not(:disabled) {
+		background: color-mix(in srgb, hsl(var(--accent)) 20%, transparent);
+		border-color: color-mix(in srgb, hsl(var(--accent)) 40%, transparent);
 	}
 
 	.nav-button .icon {
@@ -895,11 +953,17 @@
 		display: flex;
 		align-items: baseline;
 		gap: 0.5rem;
-		padding: 0.75rem 2rem;
-		background: rgba(255, 255, 255, 0.15);
-		border-radius: 9999px;
+		padding: 0.75rem 1.5rem;
+		background: color-mix(in srgb, hsl(var(--accent)) 10%, transparent);
+		border: 1px solid color-mix(in srgb, hsl(var(--accent)) 20%, transparent);
+		border-radius: 0.75rem;
 		font-weight: 800;
-		color: #ffffff;
+		color: hsl(var(--accent));
+	}
+
+	:global(.dark) .page-counter {
+		background: color-mix(in srgb, hsl(var(--accent)) 8%, transparent);
+		border-color: color-mix(in srgb, hsl(var(--accent)) 15%, transparent);
 	}
 
 	.current {

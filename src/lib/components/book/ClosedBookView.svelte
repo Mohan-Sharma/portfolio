@@ -111,13 +111,15 @@
 		padding: 2rem;
 		perspective: 2000px;
 		perspective-origin: center 40%; /* Slightly towards top for better viewing angle */
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		/* Light Mode: Clean light background */
+		background: linear-gradient(135deg, #FBFBFA 0%, #f0f0f5 100%);
 		position: relative;
 		overflow: hidden;
 	}
 
 	:global(.dark) .closed-book-container {
-		background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+		/* Dark Mode: Deep dark background - NO cyan/greenish */
+		background: linear-gradient(135deg, #040508 0%, #0a0a0f 50%, #040508 100%);
 	}
 
 	.instructions {
@@ -218,7 +220,13 @@
 		border-radius: 0 1rem 1rem 0;
 		overflow: hidden;
 		backface-visibility: hidden;
-		border: 2px solid rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		backdrop-filter: blur(30px) saturate(150%);
+		-webkit-backdrop-filter: blur(30px) saturate(150%);
+	}
+
+	:global(.dark) .cover-front {
+		border: 1px solid rgba(255, 255, 255, 0.08);
 	}
 
 	/* Back/inside of cover */
@@ -230,7 +238,13 @@
 		overflow: hidden;
 		backface-visibility: hidden;
 		transform: rotateY(180deg); /* Flipped to back */
-		border: 2px solid rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		backdrop-filter: blur(30px) saturate(150%);
+		-webkit-backdrop-filter: blur(30px) saturate(150%);
+	}
+
+	:global(.dark) .cover-back {
+		border: 1px solid rgba(255, 255, 255, 0.08);
 	}
 
 	.cover-back-gradient {
@@ -238,16 +252,16 @@
 		inset: 0;
 		background: linear-gradient(
 			135deg,
-			rgba(245, 245, 247, 0.98) 0%,
-			rgba(235, 235, 240, 0.98) 100%
+			rgba(251, 251, 250, 0.85) 0%,
+			rgba(240, 240, 245, 0.85) 100%
 		);
 	}
 
 	:global(.dark) .cover-back-gradient {
 		background: linear-gradient(
 			135deg,
-			rgba(25, 30, 45, 0.98) 0%,
-			rgba(35, 40, 55, 0.98) 100%
+			rgba(30, 35, 45, 0.7) 0%,
+			rgba(40, 45, 60, 0.75) 100%
 		);
 	}
 
@@ -256,17 +270,31 @@
 		inset: 0;
 		background: linear-gradient(
 			135deg,
-			rgba(255, 255, 255, 0.98) 0%,
-			rgba(248, 250, 252, 0.98) 100%
+			rgba(251, 251, 250, 0.85) 0%,
+			rgba(248, 248, 253, 0.85) 100%
 		);
+		/* Add noise texture for realism */
+	}
+
+	.cover-gradient::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+		opacity: 0.03;
+		pointer-events: none;
 	}
 
 	:global(.dark) .cover-gradient {
 		background: linear-gradient(
 			135deg,
-			rgba(17, 24, 39, 0.98) 0%,
-			rgba(31, 41, 55, 0.98) 100%
+			rgba(25, 30, 40, 0.7) 0%,
+			rgba(35, 40, 55, 0.75) 100%
 		);
+	}
+
+	:global(.dark) .cover-gradient::before {
+		opacity: 0.05;
 	}
 
 	.cover-content {
@@ -289,22 +317,14 @@
 	.decoration-line {
 		height: 2px;
 		width: 4rem;
-		background: linear-gradient(to right, transparent, #a64b35, transparent);
-	}
-
-	:global(.dark) .decoration-line {
-		background: linear-gradient(to right, transparent, #e27d60, transparent);
+		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
 	}
 
 	.decoration-dot {
 		width: 6px;
 		height: 6px;
 		border-radius: 50%;
-		background: #a64b35;
-	}
-
-	:global(.dark) .decoration-dot {
-		background: #e27d60;
+		background: var(--color-accent);
 	}
 
 	.cover-main {
@@ -315,46 +335,30 @@
 		font-size: clamp(2.5rem, 5vw, 4rem);
 		font-weight: 800;
 		line-height: 1.1;
-		color: #1c1c1e;
+		color: var(--color-text-primary);
 		margin-bottom: 1rem;
-	}
-
-	:global(.dark) .cover-name {
-		color: #e6e9ef;
 	}
 
 	.cover-divider {
 		width: 6rem;
 		height: 3px;
-		background: linear-gradient(to right, transparent, #a64b35, transparent);
+		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
 		margin: 1.5rem auto;
-	}
-
-	:global(.dark) .cover-divider {
-		background: linear-gradient(to right, transparent, #e27d60, transparent);
 	}
 
 	.cover-title {
 		font-size: clamp(1.25rem, 2.5vw, 1.75rem);
 		font-weight: 600;
-		color: #a64b35;
+		color: var(--color-accent);
 		margin-bottom: 1rem;
-	}
-
-	:global(.dark) .cover-title {
-		color: #e27d60;
 	}
 
 	.cover-tagline {
 		font-size: clamp(1rem, 2vw, 1.25rem);
 		font-weight: 400;
-		color: #636366;
+		color: var(--color-text-secondary);
 		font-style: italic;
 		line-height: 1.5;
-	}
-
-	:global(.dark) .cover-tagline {
-		color: #8e8e93;
 	}
 
 	/* Shine effect */
@@ -393,7 +397,7 @@
 			rgba(255, 255, 255, 0.1)
 		);
 		border-radius: 0 1rem 1rem 0;
-		transform: translateZ(-15px) translateX(30px);
+		transform: translateZ(-15px) translateX(25px);
 		box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.2);
 	}
 

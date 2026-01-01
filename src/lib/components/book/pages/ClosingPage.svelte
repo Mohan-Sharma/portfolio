@@ -60,7 +60,7 @@
 <style>
 	.closing-page {
 		height: 100%;
-		background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+		background: transparent; /* Inherit from BookSpreadView theme */
 		padding: 3rem;
 		overflow-y: auto;
 		display: flex;
@@ -86,28 +86,28 @@
 	.decoration-line {
 		height: 2px;
 		width: 4rem;
-		background: linear-gradient(to right, transparent, #e27d60, transparent);
+		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
 	}
 
 	.decoration-dot {
 		width: 6px;
 		height: 6px;
 		border-radius: 50%;
-		background: #e27d60;
-		box-shadow: 0 0 10px rgba(226, 125, 96, 0.5);
+		background: var(--color-accent);
+		box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 50%, transparent);
 	}
 
 	.closing-title {
 		font-size: clamp(2.5rem, 5vw, 3.5rem);
 		font-weight: 800;
-		color: #e6e9ef;
+		color: var(--color-text-primary);
 		line-height: 1.2;
 	}
 
 	.divider {
 		width: 6rem;
 		height: 3px;
-		background: linear-gradient(to right, transparent, #e27d60, transparent);
+		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
 		margin: 0 auto;
 	}
 
@@ -120,7 +120,7 @@
 	.message-paragraph {
 		font-size: 1.125rem;
 		line-height: 1.8;
-		color: rgba(230, 233, 239, 0.9);
+		color: var(--color-text-secondary);
 	}
 
 	.book-end {

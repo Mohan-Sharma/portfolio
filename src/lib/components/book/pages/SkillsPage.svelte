@@ -40,7 +40,7 @@
 <style>
 	.skills-page {
 		height: 100%;
-		background: linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0f0f23 100%);
+		background: transparent; /* Inherit from BookSpreadView theme */
 		padding: 3rem;
 		overflow-y: auto;
 	}
@@ -62,18 +62,18 @@
 	}
 
 	.skill-category {
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(226, 125, 96, 0.2);
+		background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
 		border-radius: 0.75rem;
 		padding: 1.5rem;
 		transition: all 0.3s ease;
 	}
 
 	.skill-category:hover {
-		background: rgba(255, 255, 255, 0.05);
-		border-color: rgba(226, 125, 96, 0.4);
+		background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+		border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
 		transform: translateY(-4px);
-		box-shadow: 0 8px 24px rgba(226, 125, 96, 0.15);
+		box-shadow: 0 8px 24px color-mix(in srgb, var(--color-accent) 15%, transparent);
 	}
 
 	.category-title {
@@ -84,7 +84,7 @@
 		font-weight: 700;
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
-		color: #e27d60;
+		color: var(--color-accent);
 		margin-bottom: 1rem;
 	}
 
@@ -103,19 +103,19 @@
 	.skill-badge {
 		font-size: 0.875rem;
 		font-weight: 600;
-		color: #e6e9ef;
-		background: rgba(226, 125, 96, 0.15);
+		color: var(--color-text-primary);
+		background: color-mix(in srgb, var(--color-accent) 15%, transparent);
 		padding: 0.5rem 1rem;
 		border-radius: 0.5rem;
-		border: 1px solid rgba(226, 125, 96, 0.3);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
 		transition: all 0.2s ease;
 	}
 
 	.skill-badge:hover {
-		background: rgba(226, 125, 96, 0.25);
-		border-color: rgba(226, 125, 96, 0.5);
+		background: color-mix(in srgb, var(--color-accent) 25%, transparent);
+		border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
 		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(226, 125, 96, 0.2);
+		box-shadow: 0 4px 12px color-mix(in srgb, var(--color-accent) 20%, transparent);
 	}
 
 	@media (max-width: 768px) {

@@ -75,7 +75,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+		background: transparent; /* Inherit from BookSpreadView theme */
 		overflow: hidden;
 		padding: 3rem;
 	}
@@ -85,7 +85,7 @@
 		position: absolute;
 		width: 80px;
 		height: 80px;
-		border-color: rgba(226, 125, 96, 0.2);
+		border-color: color-mix(in srgb, var(--color-accent) 20%, transparent);
 	}
 
 	.decorative-corner.top-left {
@@ -121,7 +121,7 @@
 		position: absolute;
 		font-size: clamp(15rem, 30vw, 25rem);
 		font-weight: 900;
-		color: rgba(226, 125, 96, 0.05);
+		color: color-mix(in srgb, var(--color-accent) 5%, transparent);
 		line-height: 1;
 		user-select: none;
 		pointer-events: none;
@@ -151,15 +151,15 @@
 	.decoration-line {
 		height: 2px;
 		width: 4rem;
-		background: linear-gradient(to right, transparent, #e27d60, transparent);
+		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
 	}
 
 	.decoration-dot {
 		width: 6px;
 		height: 6px;
 		border-radius: 50%;
-		background: #e27d60;
-		box-shadow: 0 0 10px rgba(226, 125, 96, 0.5);
+		background: var(--color-accent);
+		box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 50%, transparent);
 	}
 
 	/* Chapter label */
@@ -168,7 +168,7 @@
 		font-weight: 600;
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
-		color: rgba(230, 233, 239, 0.6);
+		color: var(--color-text-secondary);
 	}
 
 	/* Chapter title */
@@ -176,7 +176,11 @@
 		font-size: clamp(2.5rem, 6vw, 4.5rem);
 		font-weight: 800;
 		line-height: 1.1;
-		color: #e6e9ef;
+		color: var(--color-text-primary);
+		text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	:global(.dark) .chapter-title {
 		text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 	}
 
@@ -184,15 +188,15 @@
 	.divider {
 		width: 8rem;
 		height: 3px;
-		background: linear-gradient(to right, transparent, #e27d60, transparent);
-		box-shadow: 0 0 15px rgba(226, 125, 96, 0.4);
+		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+		box-shadow: 0 0 15px color-mix(in srgb, var(--color-accent) 40%, transparent);
 	}
 
 	/* Chapter subtitle */
 	.chapter-subtitle {
 		font-size: clamp(1.125rem, 2.5vw, 1.5rem);
 		font-weight: 500;
-		color: #e27d60;
+		color: var(--color-accent);
 		font-style: italic;
 		line-height: 1.6;
 		max-width: 500px;

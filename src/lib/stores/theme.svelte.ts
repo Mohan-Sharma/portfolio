@@ -63,7 +63,8 @@ class ThemeStore {
 		// Update meta theme-color for mobile browsers
 		const meta = document.querySelector('meta[name="theme-color"]');
 		if (meta) {
-			const color = this.resolved === 'dark' ? '#08080A' : '#F2F2F7';
+			// Ethereal Obsidian (#040508) for dark, Sun-Bleached Silk (#FBFBFA) for light
+			const color = this.resolved === 'dark' ? '#040508' : '#FBFBFA';
 			meta.setAttribute('content', color);
 		}
 	}

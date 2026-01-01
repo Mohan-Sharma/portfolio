@@ -4,16 +4,26 @@
 /* CSS Custom Properties for theming */
 @layer base {
 	:root {
-		/* ☀️ Light Mode: "Liquid Pearl" - High-end gallery aesthetic */
-		--color-bg-primary: #f2f2f7; /* The Gallery - weighted white */
-		--color-bg-secondary: rgba(229, 229, 234, 0.6); /* Mercury Surface - frosted with transparency */
-		--color-text-primary: #1c1c1e; /* Obsidian Ink - sharp contrast */
-		--color-text-secondary: #636366; /* Subdued gray */
-		--color-accent: #a64b35; /* Deep Terracotta - high contrast */
-		--color-accent-secondary: #88b04b; /* Soft Sage - organic fresh */
-		--color-border: rgba(0, 0, 0, 0.05); /* Subtle border */
-		--glass-opacity: 0.6;
-		--glass-border: rgba(0, 0, 0, 0.05);
+		/* ☀️ Light Mode: "Sun-Bleached Silk" - Clean, minimal backgrounds */
+		--bg-main: 60 20% 98%;      /* #FBFBFA */
+		--text-primary: 222 47% 11%; /* #0F172A */
+		--text-secondary: 215 16% 47%; /* #64748B */
+		--accent: 14 58% 55%;       /* #a64b35 - Deep Terracotta (Original) */
+		--accent-foreground: 60 20% 98%;
+		--glass-bg: 0 0% 100% / 0.5;
+		--glass-border: 0 0% 0% / 0.05;
+		--noise-opacity: 0.03;
+
+		/* Legacy color mappings for backwards compatibility */
+		--color-bg-primary: hsl(var(--bg-main));
+		--color-bg-secondary: hsla(0, 0%, 100%, 0.5);
+		--color-text-primary: hsl(var(--text-primary));
+		--color-text-secondary: hsl(var(--text-secondary));
+		--color-accent: hsl(var(--accent)); /* Orange in both modes */
+		--color-accent-secondary: hsl(var(--accent));
+		--color-border: hsla(0, 0%, 0%, 0.05);
+		--glass-opacity: 0.5;
+		--glass-border-color: hsla(0, 0%, 0%, 0.05);
 
 		/* Typography */
 		--font-sans:
@@ -26,8 +36,7 @@
 		--material-metalness: 0.1;
 
 		/* Glassmorphism */
-		--glass-opacity: 0.1;
-		--glass-blur: 20px;
+		--glass-blur: 30px;
 
 		/* Spacing */
 		--spacing-unit: 0.25rem;
@@ -38,9 +47,9 @@
 		--radius-lg: 1rem;
 
 		/* Shadows - Architectural */
-		--shadow-sm: 0 1px 2px 0 rgb(28 28 30 / 0.08);
-		--shadow-md: 0 4px 6px -1px rgb(28 28 30 / 0.12);
-		--shadow-lg: 0 10px 15px -3px rgb(28 28 30 / 0.15);
+		--shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.08);
+		--shadow-md: 0 4px 6px -1px rgb(15 23 42 / 0.12);
+		--shadow-lg: 0 10px 15px -3px rgb(15 23 42 / 0.15);
 
 		/* Transitions */
 		--transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -48,22 +57,29 @@
 		--transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	/* 🌑 Dark Mode: "Anodized Obsidian" - Industrial tech aesthetic
-	   NOTE: The @media (prefers-color-scheme: dark) has been removed to allow
-	   manual theme toggle. Dark mode is now controlled ONLY via .dark class.
+	/* 🌑 Dark Mode: "Ethereal Obsidian" - Deep space with synthetic cyan accents
+	   NOTE: Dark mode is controlled via .dark class for manual theme toggle
 	*/
-
-	/* Dark theme class (for manual toggle) */
 	.dark {
-		--color-bg-primary: #08080a; /* The Void - absolute base */
-		--color-bg-secondary: rgba(20, 20, 24, 0.7); /* Surface - cards with transparency */
-		--color-text-primary: #e6e9ef; /* Bright readable text */
-		--color-text-secondary: #8e8e93; /* Subdued text */
-		--color-accent: #e27d60; /* Anodized Copper - hero accent */
-		--color-accent-secondary: #ffb347; /* Biolume Amber - glow effects */
-		--color-border: rgba(255, 255, 255, 0.08); /* Subtle glass border */
-		--glass-opacity: 0.7;
-		--glass-border: rgba(255, 255, 255, 0.08);
+		--bg-main: 225 33% 3%;      /* #040508 - Deep Dark */
+		--text-primary: 210 40% 98%; /* #F8FAFC */
+		--text-secondary: 215 20% 65%; /* #94A3B8 */
+		--accent: 12 59% 63%;       /* #e27d60 - Anodized Copper (Original Orange) */
+		--accent-foreground: 225 33% 3%;
+		--glass-bg: 225 25% 7% / 0.6; /* #0D0F16 */
+		--glass-border: 210 40% 98% / 0.08;
+		--noise-opacity: 0.05;
+
+		/* Legacy color mappings */
+		--color-bg-primary: hsl(var(--bg-main));
+		--color-bg-secondary: hsla(225, 25%, 7%, 0.6);
+		--color-text-primary: hsl(var(--text-primary));
+		--color-text-secondary: hsl(var(--text-secondary));
+		--color-accent: hsl(var(--accent)); /* Orange in dark mode too */
+		--color-accent-secondary: hsl(var(--accent));
+		--color-border: hsla(210, 40%, 98%, 0.08);
+		--glass-opacity: 0.6;
+		--glass-border-color: hsla(210, 40%, 98%, 0.08);
 		--material-roughness: 0.2;
 		--material-metalness: 0.8;
 		--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
@@ -147,27 +163,51 @@ html.dark {
 
 /* Custom Components */
 @layer components {
-	/* Glassmorphism - Frosted Chrome Effect */
+	/* Glassmorphism - Realistic Glass Effect with Noise Texture */
 	.glass {
-		background: var(--color-bg-secondary);
-		backdrop-filter: blur(25px) saturate(160%);
-		-webkit-backdrop-filter: blur(25px) saturate(160%);
-		border: 1px solid var(--glass-border);
 		position: relative;
-		box-shadow: var(--shadow-md);
+		overflow: hidden;
+		border-radius: 0.75rem;
+		border: 1px solid color-mix(in srgb, hsl(var(--glass-border)), transparent);
+		background: color-mix(in srgb, hsl(var(--glass-bg)), transparent);
+		backdrop-filter: blur(30px) saturate(150%);
+		-webkit-backdrop-filter: blur(30px) saturate(150%);
+		box-shadow: var(--shadow-lg);
+		transition: all 0.3s ease;
 	}
 
-	/* Noise Texture Overlay for Glass */
+	/* Realistic Noise Texture Overlay for Glass */
 	.glass::before {
 		content: '';
 		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05' /%3E%3C/svg%3E");
-		opacity: 0.05;
+		inset: 0;
 		pointer-events: none;
+		z-index: -1;
+		opacity: var(--noise-opacity);
+		background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+	}
+
+	/* Glass Card Variant with enhanced effects */
+	.glass-card {
+		position: relative;
+		overflow: hidden;
+		border-radius: 0.75rem;
+		border: 1px solid color-mix(in srgb, hsl(var(--glass-border)), transparent);
+		background: color-mix(in srgb, hsl(var(--glass-bg)), transparent);
+		backdrop-filter: blur(30px) saturate(150%);
+		-webkit-backdrop-filter: blur(30px) saturate(150%);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease;
+	}
+
+	.glass-card::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: -1;
+		opacity: var(--noise-opacity);
+		background-image: url('https://grainy-gradients.vercel.app/noise.svg');
 	}
 
 	/* Ghost Wireframe - Blueprint Look */
