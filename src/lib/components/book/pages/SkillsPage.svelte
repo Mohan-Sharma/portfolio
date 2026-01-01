@@ -2,10 +2,10 @@
 	/**
 	 * Skills Page Component
 	 * Categorized technical skills display
+	 * Consistent design with dark background and orangish accents
 	 */
 
 	import type { SkillsContent } from '$lib/types/book';
-	import { Card, Badge } from '$lib/components/ui';
 
 	interface Props {
 		data: SkillsContent;
@@ -14,34 +14,118 @@
 	let { data }: Props = $props();
 </script>
 
-<div class="h-full bg-gallery dark:bg-void p-6 md:p-8 overflow-hidden flex items-center">
-	<div class="max-w-5xl mx-auto space-y-6 w-full">
-		<!-- Header -->
-		<div class="text-center space-y-3">
-			<div class="text-terracotta dark:text-copper text-xs font-mono uppercase tracking-[0.3em]">
-				Chapter Four
-			</div>
-			<h2 class="text-3xl md:text-4xl font-bold text-obsidian-ink dark:text-text-main-dark">
-				Technical Skills
-			</h2>
-			<div class="w-20 h-1 bg-terracotta dark:bg-copper mx-auto rounded-full"></div>
-		</div>
-
+<div class="skills-page">
+	<div class="content-wrapper">
 		<!-- Skills Grid -->
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-			{#each Object.entries(data.categories) as [category, skills]}
-				<Card variant="elevated" padding="md">
-					<h3 class="text-lg font-bold text-terracotta dark:text-copper mb-3 flex items-center gap-2">
-						<span class="w-1.5 h-1.5 rounded-full bg-terracotta dark:bg-copper"></span>
+		<div class="skills-grid">
+			{#each Object.entries(data.categories) as [category, skills], index}
+				<div class="skill-category animate-[fadeInUp_0.6s_ease-out_{(index * 0.1)}s_backwards]">
+					<h3 class="category-title">
+						<svg class="category-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+						</svg>
 						{category}
 					</h3>
-					<div class="flex flex-wrap gap-2">
+					<div class="skills-list">
 						{#each skills as skill}
-							<Badge variant="default" size="md">{skill}</Badge>
+							<span class="skill-badge">{skill}</span>
 						{/each}
 					</div>
-				</Card>
+				</div>
 			{/each}
 		</div>
 	</div>
 </div>
+
+<style>
+	.skills-page {
+		height: 100%;
+		background: linear-gradient(135deg, #16213e 0%, #1a1a2e 50%, #0f0f23 100%);
+		padding: 3rem;
+		overflow-y: auto;
+	}
+
+	.content-wrapper {
+		max-width: 900px;
+		margin: 0 auto;
+		min-height: 100%;
+		display: flex;
+		align-items: flex-start;
+		padding: 2rem 0;
+	}
+
+	.skills-grid {
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 2rem;
+	}
+
+	.skill-category {
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(226, 125, 96, 0.2);
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+		transition: all 0.3s ease;
+	}
+
+	.skill-category:hover {
+		background: rgba(255, 255, 255, 0.05);
+		border-color: rgba(226, 125, 96, 0.4);
+		transform: translateY(-4px);
+		box-shadow: 0 8px 24px rgba(226, 125, 96, 0.15);
+	}
+
+	.category-title {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		font-size: 1rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: #e27d60;
+		margin-bottom: 1rem;
+	}
+
+	.category-icon {
+		width: 1.25rem;
+		height: 1.25rem;
+		flex-shrink: 0;
+	}
+
+	.skills-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.skill-badge {
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: #e6e9ef;
+		background: rgba(226, 125, 96, 0.15);
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		border: 1px solid rgba(226, 125, 96, 0.3);
+		transition: all 0.2s ease;
+	}
+
+	.skill-badge:hover {
+		background: rgba(226, 125, 96, 0.25);
+		border-color: rgba(226, 125, 96, 0.5);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(226, 125, 96, 0.2);
+	}
+
+	@media (max-width: 768px) {
+		.skills-page {
+			padding: 2rem 1.5rem;
+		}
+
+		.skills-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+	}
+</style>
