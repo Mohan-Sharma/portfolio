@@ -491,7 +491,7 @@
 	/* Table of Contents Navigation Button - Book-like design */
 	.toc-nav-button {
 		position: fixed;
-		bottom: 8rem;
+		bottom: 2.5rem;
 		right: 2.5rem;
 		z-index: 100;
 		display: flex;
@@ -499,21 +499,22 @@
 		align-items: center;
 		gap: 0.5rem;
 		padding: 1rem;
-		background: color-mix(in srgb, hsl(var(--accent)) 15%, transparent);
+		/* Light mode: white background with accent color */
+		background: rgba(255, 255, 255, 0.95);
 		backdrop-filter: blur(12px) saturate(150%);
-		border: 2px solid color-mix(in srgb, hsl(var(--accent)) 30%, transparent);
+		border: 2px solid color-mix(in srgb, hsl(var(--accent)) 40%, transparent);
 		border-radius: 0.75rem;
 		color: hsl(var(--accent));
 		cursor: pointer;
 		transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-		box-shadow: 0 4px 16px color-mix(in srgb, hsl(var(--accent)) 20%, transparent);
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 	}
 
 	.toc-nav-button:hover {
-		background: color-mix(in srgb, hsl(var(--accent)) 25%, transparent);
-		border-color: color-mix(in srgb, hsl(var(--accent)) 50%, transparent);
+		background: color-mix(in srgb, hsl(var(--accent)) 8%, white);
+		border-color: hsl(var(--accent));
 		transform: translateY(-4px) scale(1.05);
-		box-shadow: 0 8px 24px color-mix(in srgb, hsl(var(--accent)) 35%, transparent);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 	}
 
 	.toc-nav-button .icon {
@@ -532,11 +533,17 @@
 	:global(.dark) .toc-nav-button {
 		background: color-mix(in srgb, hsl(var(--accent)) 12%, transparent);
 		border-color: color-mix(in srgb, hsl(var(--accent)) 25%, transparent);
+		box-shadow: 0 4px 16px color-mix(in srgb, hsl(var(--accent)) 20%, transparent);
+		/* Subtle glow on text and icon */
+		text-shadow: 0 0 8px color-mix(in srgb, hsl(var(--accent)) 40%, transparent);
 	}
 
 	:global(.dark) .toc-nav-button:hover {
 		background: color-mix(in srgb, hsl(var(--accent)) 20%, transparent);
 		border-color: color-mix(in srgb, hsl(var(--accent)) 40%, transparent);
+		box-shadow: 0 8px 24px color-mix(in srgb, hsl(var(--accent)) 35%, transparent);
+		/* Enhanced glow on hover */
+		text-shadow: 0 0 12px color-mix(in srgb, hsl(var(--accent)) 60%, transparent);
 	}
 
 	.page-indicator {
@@ -889,18 +896,22 @@
 		align-items: center;
 		gap: 2rem;
 		padding: 1rem 2rem;
-		background: rgba(0, 0, 0, 0.3);
+		/* Light mode: white with subtle shadow */
+		background: rgba(255, 255, 255, 0.95);
 		backdrop-filter: blur(16px) saturate(180%);
 		border-radius: 1.5rem;
-		border: 1px solid rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(0, 0, 0, 0.08);
 		box-shadow:
-			0 8px 32px rgba(0, 0, 0, 0.25),
-			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+			0 8px 32px rgba(0, 0, 0, 0.12),
+			inset 0 1px 0 rgba(255, 255, 255, 0.8);
 	}
 
 	:global(.dark) .navigation-controls {
 		background: rgba(0, 0, 0, 0.5);
 		border-color: rgba(255, 255, 255, 0.08);
+		box-shadow:
+			0 8px 32px rgba(0, 0, 0, 0.25),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	}
 
 	.nav-button {
@@ -937,11 +948,15 @@
 	:global(.dark) .nav-button {
 		background: color-mix(in srgb, hsl(var(--accent)) 12%, transparent);
 		border-color: color-mix(in srgb, hsl(var(--accent)) 25%, transparent);
+		/* Subtle glow on text and icon */
+		text-shadow: 0 0 8px color-mix(in srgb, hsl(var(--accent)) 40%, transparent);
 	}
 
 	:global(.dark) .nav-button:hover:not(:disabled) {
 		background: color-mix(in srgb, hsl(var(--accent)) 20%, transparent);
 		border-color: color-mix(in srgb, hsl(var(--accent)) 40%, transparent);
+		/* Enhanced glow on hover */
+		text-shadow: 0 0 12px color-mix(in srgb, hsl(var(--accent)) 60%, transparent);
 	}
 
 	.nav-button .icon {
@@ -964,6 +979,8 @@
 	:global(.dark) .page-counter {
 		background: color-mix(in srgb, hsl(var(--accent)) 8%, transparent);
 		border-color: color-mix(in srgb, hsl(var(--accent)) 15%, transparent);
+		/* Subtle glow on page numbers */
+		text-shadow: 0 0 8px color-mix(in srgb, hsl(var(--accent)) 35%, transparent);
 	}
 
 	.current {
