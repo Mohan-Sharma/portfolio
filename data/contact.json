@@ -1,0 +1,16 @@
+{
+	"email": "mtarrnesharma@gmail.com",
+	"phone": "+91-8123885270",
+	"location": {
+		"address": "Chandrapur, Bokajan",
+		"city": "Karbi Anglong",
+		"state": "Assam",
+		"country": "India",
+		"zip": "782490"
+	},
+	"socials": {
+		"linkedin": "https://www.linkedin.com/in/mohansharma-dev/",
+		"github": "https://github.com/mohansharma-dev",
+		"youtube": "https://www.youtube.com/@KnowledgeSharingChannel"
+	}
+}

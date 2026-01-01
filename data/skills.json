@@ -1,0 +1,76 @@
+{
+	"Languages": [
+		"Java (8-25)",
+		"Python",
+		"JavaScript"
+	],
+	"Backend & Frameworks": [
+		"Spring",
+		"Spring Boot",
+		"Hibernate",
+		"CAP (Node.js)",
+		"CDS"
+	],
+	"AI & Agentic Systems": [
+		"MCP",
+		"LangChain",
+		"LangGraph",
+		"LangChain.js",
+		"LangGraph.js",
+		"SAP AI Core",
+		"Ollama"
+	],
+	"RAG & Vector Search": [
+		"SAP HANA Vector Engine",
+		"SAP Document AI",
+		"Chroma DB"
+	],
+	"SAP & Integration": [
+		"SAP BTP",
+		"Cloud Foundry",
+		"SAP CPI",
+		"SAP APIM"
+	],
+	"Security & Identity": [
+		"SAP XSUAA",
+		"OAuth 2.0",
+		"JWT"
+	],
+	"Commerce": [
+		"SAP Commerce Cloud (Hybris)",
+		"B2B Commerce"
+	],
+	"Frontend": [
+		"Svelte Kit",
+		"Svelte 5",
+		"HTML",
+		"CSS",
+		"NodeJS",
+		"React"
+	],
+	"Databases & Cache": [
+		"SAP HANA",
+		"MySQL",
+		"PostgreSQL",
+		"MongoDB",
+		"Redis"
+	],
+	"DevOps & CI/CD": [
+		"Docker",
+		"Jenkins",
+		"Maven",
+		"Git Actions",
+		"Git"
+	],
+	"Testing & Automation": [
+		"JUnit 5",
+		"Cucumber",
+		"Selenium (BDD)"
+	],
+	"External Systems": [
+		"Salesforce (Force/Bulk API)",
+		"Oracle BigMachine",
+		"PayPal",
+		"Qwikcilver"
+	]
+}

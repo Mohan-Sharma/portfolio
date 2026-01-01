@@ -1,0 +1,37 @@
+[
+	{
+		"id": "star-performer",
+		"title": "Star Performer Award",
+		"organization": "SAP",
+		"year": "2024",
+		"description": "Recognized for demonstrating a strong customer-centric mindset and consistently delivering high-impact enterprise solutions."
+	},
+	{
+		"id": "gate-2013",
+		"title": "GATE 2013 – Qualified",
+		"organization": "Graduate Aptitude Test in Engineering",
+		"year": "2013",
+		"description": "Secured All India Rank 6406, demonstrating strong fundamentals in computer science and engineering."
+	},
+	{
+		"id": "academic-excellence",
+		"title": "Academic Excellence Scholarships",
+		"organization": "District Education Board",
+		"year": "2007-2009",
+		"description": "Awarded multiple scholarships for securing highest marks at the district level during secondary education."
+	},
+	{
+		"id": "class-coordinator",
+		"title": "Class Coordinator",
+		"organization": "Computer Science & Engineering Department",
+		"year": "2010-2013",
+		"description": "Acted as a liaison between students and faculty, coordinating academic activities and departmental initiatives."
+	},
+	{
+		"id": "competitive-excellence",
+		"title": "Competitive Excellence",
+		"organization": "Various Competitions",
+		"year": "2007-2013",
+		"description": "Winner and active participant in multiple quizzes, group discussions, and speech competitions, demonstrating strong analytical and communication skills."
+	}
+]

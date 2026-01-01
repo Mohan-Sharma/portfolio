@@ -1,0 +1,69 @@
+[
+	{
+		"id": "sap-labs",
+		"title": "Senior Developer",
+		"company": "SAP Labs India",
+		"location": "Bangalore, India",
+		"startDate": "Nov 2018",
+		"endDate": null,
+		"current": true,
+		"description": "Leading enterprise-scale architecture for AI governance, integration platforms, and B2B commerce systems. Focused on designing production-ready Agentic AI platforms with governance-first approach, building complex multi-system integrations, and delivering mission-critical commerce solutions.",
+		"technologies": [
+			"Java",
+			"Spring Boot",
+			"SAP BTP",
+			"SAP Integration Suite",
+			"SAP Commerce Cloud",
+			"Python",
+			"LangChain",
+			"LangGraph",
+			"SAP AI Core",
+			"SAP HANA",
+			"Cloud Foundry",
+			"MCP",
+			"CAP",
+			"CDS"
+		]
+	},
+	{
+		"id": "landmark",
+		"title": "Hybris Developer",
+		"company": "Landmark Group",
+		"location": "Dubai, UAE",
+		"startDate": "Apr 2017",
+		"endDate": "Oct 2018",
+		"current": false,
+		"description": "Architected high-performance caching strategies, wallet systems, and payment integrations for large-scale e-commerce platforms. Improved site performance, customer retention, and payment flexibility across multiple regional markets.",
+		"technologies": [
+			"Java",
+			"Spring",
+			"SAP Commerce",
+			"Redis",
+			"Cloudflare",
+			"PayPal APIs",
+			"Qwikcilver APIs",
+			"JSP"
+		]
+	},
+	{
+		"id": "nthdimenzion",
+		"title": "Software Engineer",
+		"company": "NthDimenzion Solutions Pvt. Ltd.",
+		"location": "Pune, India",
+		"startDate": "Aug 2013",
+		"endDate": "Mar 2017",
+		"current": false,
+		"description": "Developed end-to-end enterprise systems including insurance management, hospital management, and payroll automation platforms. Built scalable backend services, dynamic frontends, and multi-tenant architectures for clients across Africa and Middle East.",
+		"technologies": [
+			"Java 8",
+			"Spring Boot",
+			"Hibernate",
+			"AngularJS",
+			"MySQL",
+			"MongoDB",
+			"ZK Framework",
+			"Axon Framework",
+			"SparkJava"
+		]
+	}
+]

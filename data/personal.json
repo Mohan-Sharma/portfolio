@@ -1,0 +1,16 @@
+{
+	"name": "Mohan Sharma",
+	"title": "Senior Software Engineer",
+	"tagline": "Architecting Enterprise-Scale AI Governance & Integration Platforms",
+	"bio": "Senior Software Engineer with over 13 years of experience delivering large-scale, mission-critical enterprise systems across commerce, integration, and AI domains. Expert in Java, Spring ecosystem, SAP Commerce Cloud, SAP BTP, and SAP Integration Suite. In recent years, focused on architecting governance-first Agentic AI and RAG platforms. Known for strong architectural ownership, system thinking, and the ability to transform complex business requirements into scalable, secure, and maintainable solutions.",
+	"location": {
+		"city": "Chandrapur, Bokajan",
+		"state": "Karbi Anglong, Assam",
+		"country": "India",
+		"zip": "782490"
+	},
+	"contact": {
+		"phone": "+91-8123885270",
+		"email": "mtarrnesharma@gmail.com"
+	}
+}

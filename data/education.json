@@ -1,0 +1,26 @@
+[
+	{
+		"id": "btech",
+		"degree": "Bachelor of Technology (B.Tech)",
+		"field": "Computer Science & Engineering",
+		"institution": "Punjab Technical University",
+		"year": "2013",
+		"location": "Punjab, India"
+	},
+	{
+		"id": "higher-secondary",
+		"degree": "Higher Secondary (Class XII)",
+		"field": "Science (Mathematics)",
+		"institution": "J.B. College, Jorhat",
+		"year": "2009",
+		"location": "Jorhat, Assam, India"
+	},
+	{
+		"id": "secondary",
+		"degree": "Secondary School (Class X)",
+		"field": "General Education",
+		"institution": "Vidhya Sagar High School",
+		"year": "2007",
+		"location": "Bokajan, Karbi Anglong, Assam, India"
+	}
+]

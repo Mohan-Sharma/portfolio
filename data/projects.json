@@ -1,0 +1,392 @@
+[
+	{
+		"id": "mcp-governance",
+		"title": "MCP Governance Security Gateway",
+		"subtitle": "Enterprise AI Governance Platform",
+		"company": "SAP Labs India",
+		"duration": "Dec 2025 – Present",
+		"description": "Enterprise-scale governance and security platform for Model Context Protocol (MCP) based Agentic AI systems. Designed to convert MCP from a developer-centric protocol into a governed enterprise platform with Zero-Trust security, identity-bound execution, and fine-grained RBAC.",
+		"techStack": [
+			"MCP",
+			"CAP (Node.js)",
+			"CDS",
+			"SAP XSUAA",
+			"SAP HANA",
+			"SAP BTP",
+			"Cloud Foundry",
+			"JWT",
+			"OAuth 2.0"
+		],
+		"highlights": [
+			"Identified critical enterprise adoption blockers including lack of identity attribution, over-privileged access models, absence of centralized kill switches, and prompt-injection-driven destructive actions",
+			"Conceptualized and architected a centralized MCP Governance Gateway to convert MCP into a governed enterprise platform",
+			"Designed Zero-Trust security model where all MCP capabilities are denied by default and explicitly enabled through centralized governance",
+			"Implemented identity-bound execution by integrating SAP XSUAA and JWT-based authentication, ensuring every AI action is traceable to a real human user",
+			"Designed fine-grained, capability-level RBAC, moving beyond coarse role-based permissions to tool-level and resource-specific authorization",
+			"Built multi-tenant SaaS architecture on SAP BTP ensuring strict tenant isolation, enterprise-grade auditability, and forensic-ready centralized logging",
+			"Implemented real-time operational kill switch allowing instant shutdown of compromised MCP servers without application restarts",
+			"Enabled secure, production-ready adoption of Agentic AI at enterprise scale with governance, accountability, and auditability as first-class capabilities"
+		],
+		"featured": true,
+		"tags": [
+			"AI Governance",
+			"Zero-Trust Security",
+			"Agentic AI",
+			"Enterprise Architecture",
+			"Multi-Tenant SaaS"
+		]
+	},
+	{
+		"id": "test-harness-concur",
+		"title": "Test Harness for Concur Off RevDb Integration",
+		"subtitle": "Enterprise Integration Test Automation",
+		"company": "SAP Labs India",
+		"duration": "Apr 2025 – Nov 2025",
+		"description": "End-to-end automated test framework for validating complex multi-system enterprise integrations. BDD-driven test automation framework to validate integrations between Salesforce, Oracle BigMachine (BMI), SAP Concur, and SAP S/4HANA with automated regression testing.",
+		"techStack": [
+			"Java 25",
+			"Spring Boot 4",
+			"Cucumber-Spring",
+			"JUnit 5",
+			"Selenium",
+			"SAP APIM",
+			"SAP Integration Suite",
+			"Jenkins",
+			"BDD"
+		],
+		"highlights": [
+			"Designed comprehensive BDD-driven test automation framework to validate integrations between Salesforce, Oracle BigMachine, SAP Concur, and SAP S/4HANA",
+			"Modelled real enterprise business flows using Gherkin feature files, enabling non-technical stakeholders to understand and validate integration behaviour",
+			"Implemented Selenium-based browser automation to create Salesforce opportunities and generate quotes in Oracle BMI",
+			"Triggered quote submission workflows via SAP APIM and SAP Integration Suite into SAP S/4HANA",
+			"Dynamically extracted generated Quote IDs and validated downstream business objects including Solution Quotations, Subscription Items, Subscription Contracts, Contract Account and Business Partners",
+			"Integrated framework into Jenkins Declarative Pipelines, enabling automated regression testing, artifact publishing, and early detection of integration regressions",
+			"Improved confidence and reliability of highly complex, revenue-critical integrations while reducing manual testing effort"
+		],
+		"featured": true,
+		"tags": [
+			"Test Automation",
+			"BDD",
+			"Enterprise Integration",
+			"CI/CD",
+			"Selenium"
+		]
+	},
+	{
+		"id": "concur-integration",
+		"title": "Concur Off RevDb Integration using SAP CPI & APIM",
+		"subtitle": "Enterprise Integration Landscape",
+		"company": "SAP Labs India",
+		"duration": "Apr 2025 – Oct 2025",
+		"description": "Enterprise-grade integration landscape connecting Salesforce, Oracle BigMachine, SAP Concur, and SAP S/4HANA. Built secure inbound APIs, CPI integration flows, XML-to-JSON transformations, and periodic batch-driven synchronization with full traceability.",
+		"techStack": [
+			"SAP Integration Suite",
+			"SAP CPI",
+			"SAP API Management",
+			"SAP BTP",
+			"Salesforce Bulk API",
+			"OData v4",
+			"SAP AIF",
+			"XML",
+			"JSON"
+		],
+		"highlights": [
+			"Integration 1: Oracle BigMachine → SAP S/4HANA - Designed secure inbound APIs using SAP APIM with authentication, authorization, IP whitelisting, and traffic control",
+			"Built CPI integration flows with XML-to-JSON transformation, field-level data sanitization, enrichment, and validation",
+			"Routed transformed payloads to SAP AIF enabled S/4HANA endpoints with robust error handling, monitoring, and retry mechanisms",
+			"Integration 2: Salesforce → SAP S/4HANA - Designed periodic, batch-driven integration to synchronize Concur Project data",
+			"Implemented data extraction using Salesforce Bulk API to efficiently handle large datasets",
+			"Persisted project data into SAP S/4HANA using OData v4 services with post-processing logic to update Salesforce records",
+			"Designed idempotent, restart-safe, and operationally transparent flows",
+			"Established robust, scalable integration backbone with secure API exposure, reliable transformations, and end-to-end traceability"
+		],
+		"featured": true,
+		"tags": [
+			"Enterprise Integration",
+			"SAP CPI",
+			"API Management",
+			"Multi-System Integration",
+			"OData"
+		]
+	},
+	{
+		"id": "agentic-rag-jira",
+		"title": "Agentic RAG Platform for Concur Jira",
+		"subtitle": "AI-Powered Knowledge Preservation",
+		"company": "SAP Labs India",
+		"duration": "Nov 2024 – Mar 2025",
+		"description": "Agentic Retrieval-Augmented Generation platform for preserving and searching legacy Jira knowledge. Built document ingestion pipeline, intelligent chunking, vectorization, and multi-document reasoning with modern chat-based frontend.",
+		"techStack": [
+			"Python",
+			"LangChain",
+			"LangGraph",
+			"SAP Document AI",
+			"SAP HANA Vector Engine",
+			"SAP AI Core",
+			"Cloud Foundry",
+			"Svelte Kit",
+			"Svelte 5",
+			"LangChain.js",
+			"LangGraph.js"
+		],
+		"highlights": [
+			"Addressed knowledge loss risks during migration from on-premise Concur Jira to SAP Jira by designing system to search legacy Jira data exported as PDFs",
+			"Built document ingestion pipeline using Python and SAP Document AI to extract structured content from PDFs",
+			"Implemented intelligent document chunking and vectorization using SAP AI Core, SAP HANA Vector Engine, Python, LangChain and LangGraph",
+			"Designed Agentic RAG workflows enabling multi-document reasoning and contextual conversations using LangChain.js and LangGraph.js",
+			"Developed modern chat-based frontend using Svelte Kit and Svelte 5",
+			"Deployed solution on SAP BTP using Cloud Foundry and SAP AI Core",
+			"Prevented permanent loss of historical Jira knowledge and improved productivity through fast, conversational search"
+		],
+		"featured": true,
+		"tags": [
+			"Agentic AI",
+			"RAG",
+			"Vector Search",
+			"Knowledge Management",
+			"LangChain"
+		]
+	},
+	{
+		"id": "ml-case-routing",
+		"title": "Machine Learning Based Salesforce Case Routing",
+		"subtitle": "ML-Driven Support Optimization",
+		"company": "SAP Labs India",
+		"duration": "Nov 2021 – Present",
+		"description": "ML-driven automation platform to optimize Salesforce case routing and support efficiency. Automatically classifies incoming cases using machine learning models, assigns suggested queues, and generates accuracy metrics for continuous improvement.",
+		"techStack": [
+			"Java 21",
+			"Spring Boot 3",
+			"Cloud Foundry",
+			"Salesforce REST API",
+			"SAP Intelligent Enterprise CoE ML Models"
+		],
+		"highlights": [
+			"Designed and implemented system that automatically classifies incoming Salesforce cases using machine learning models",
+			"Fetched newly created Salesforce cases and sent case descriptions to ML models for prediction",
+			"Automatically assigned suggested queues based on ML recommendations",
+			"Retrieved closed cases post-resolution to compare predicted versus actual queues",
+			"Generated accuracy metrics to continuously evaluate ML effectiveness",
+			"Reduced manual case triaging effort for support teams and improved first-response time",
+			"Established feedback loop to continuously improve ML model performance"
+		],
+		"featured": false,
+		"tags": [
+			"Machine Learning",
+			"Salesforce",
+			"Automation",
+			"Support Optimization"
+		]
+	},
+	{
+		"id": "concur-commerce",
+		"title": "SAP Concur Digital B2B Commerce Platform, USA",
+		"subtitle": "Enterprise B2B Commerce",
+		"company": "SAP Labs India",
+		"duration": "Nov 2018 – Present",
+		"description": "Enterprise B2B digital commerce platform for SAP Concur subscription products. Enabled trial-to-paid conversion, subscription upgrades, transaction commitment increases, and add-on purchases with core B2B commerce capabilities.",
+		"techStack": [
+			"Java",
+			"Spring",
+			"SAP Commerce Cloud",
+			"SAP Commerce Public Cloud",
+			"JavaScript",
+			"JSP",
+			"CI/CD Pipelines"
+		],
+		"highlights": [
+			"Contributed to end-to-end development and continuous enhancement of SAP Concur Digital B2B Commerce Store",
+			"Enabled trial-to-paid conversion, subscription upgrades, transaction commitment increases, and add-on purchases",
+			"Implemented core B2B commerce capabilities including pricing, promotions, checkout, and subscription lifecycle management",
+			"Worked extensively on CI/CD pipelines and cloud deployments",
+			"Enabled scalable digital revenue channels for SAP Concur with enterprise-grade reliability and performance at scale"
+		],
+		"featured": false,
+		"tags": [
+			"B2B Commerce",
+			"SAP Commerce Cloud",
+			"Subscription Management",
+			"Enterprise"
+		]
+	},
+	{
+		"id": "cache-management",
+		"title": "Cache Management Platform",
+		"subtitle": "High-Performance E-Commerce Caching",
+		"company": "Landmark Group",
+		"duration": "Aug 2018 – Sep 2018",
+		"description": "High-performance caching architecture for large-scale e-commerce traffic. Designed group-based caching strategy using Redis and Cloudflare to significantly improve site performance during high-traffic promotions.",
+		"techStack": [
+			"Java",
+			"Spring",
+			"SAP Commerce",
+			"Redis",
+			"Cloudflare",
+			"Spring Boot"
+		],
+		"highlights": [
+			"Identified performance bottlenecks caused by user-level caching",
+			"Designed group-based caching strategy using hashed user-group combinations",
+			"Cached content using Redis and Cloudflare for optimal performance",
+			"Built standalone cache management service for centralized invalidation",
+			"Significantly improved site performance during high-traffic promotions",
+			"Reduced infrastructure strain and page load times",
+			"Improved customer experience during peak sales events"
+		],
+		"featured": false,
+		"tags": [
+			"Performance Optimization",
+			"Caching",
+			"Redis",
+			"E-Commerce"
+		]
+	},
+	{
+		"id": "landmark-wallet",
+		"title": "Landmark Wallet System",
+		"subtitle": "Customer Retention Platform",
+		"company": "Landmark Group",
+		"duration": "May 2018 – Jul 2018",
+		"description": "Customer retention and refund optimization system for e-commerce platforms. Designed wallet-based refund mechanism to redirect refunds into customer wallets for future purchases, improving retention and reducing revenue leakage.",
+		"techStack": [
+			"Java",
+			"Spring",
+			"SAP Commerce",
+			"JSP"
+		],
+		"highlights": [
+			"Designed and implemented wallet-based refund mechanism",
+			"Redirected refunds into customer wallets instead of direct payment reversals",
+			"Enabled wallet reuse for future purchases",
+			"Improved customer retention and repeat purchases",
+			"Reduced revenue leakage from cancellations and returns",
+			"Enhanced customer lifetime value"
+		],
+		"featured": false,
+		"tags": [
+			"Customer Retention",
+			"E-Commerce",
+			"Wallet System"
+		]
+	},
+	{
+		"id": "payments-integrations",
+		"title": "Payments & Gift Card Integrations",
+		"subtitle": "Multi-Region Payment Platform",
+		"company": "Landmark Group",
+		"duration": "2017 – 2018",
+		"description": "Payment and prepaid revenue enablement for multi-region e-commerce platforms. Integrated PayPal payment gateway for India and GCC markets, implemented Qwikcilver gift card functionality, and contributed to multiple regional launches.",
+		"techStack": [
+			"Java",
+			"Spring",
+			"SAP Commerce",
+			"JSP",
+			"PayPal APIs",
+			"Qwikcilver APIs"
+		],
+		"highlights": [
+			"Integrated PayPal payment gateway for India and GCC markets",
+			"Implemented Qwikcilver gift card functionality",
+			"Contributed to Click & Collect, Sadad payments, and Bahrain site launches",
+			"Enabled secure, region-specific payment options",
+			"Generated prepaid revenue via gift cards",
+			"Improved checkout flexibility and customer reach"
+		],
+		"featured": false,
+		"tags": [
+			"Payment Integration",
+			"E-Commerce",
+			"Multi-Region"
+		]
+	},
+	{
+		"id": "insurance-system",
+		"title": "Life Insurance Management System",
+		"subtitle": "Digital Insurance Platform",
+		"company": "Prudential Life Assurance, Zambia",
+		"duration": "Jan 2016 – Mar 2017",
+		"description": "End-to-end digital insurance management platform. Developed insurance lifecycle workflows from plan creation to claims, built modular backend services and dynamic frontends, supporting core online insurance operations.",
+		"techStack": [
+			"Java 8",
+			"Spring Boot",
+			"Hibernate",
+			"AngularJS",
+			"MySQL",
+			"MongoDB"
+		],
+		"highlights": [
+			"Developed insurance lifecycle workflows from plan creation to claims",
+			"Built modular backend services and dynamic frontends",
+			"Supported core online insurance operations",
+			"Digitized insurance operations end-to-end",
+			"Improved operational efficiency and data consistency",
+			"Enabled scalable online insurance services"
+		],
+		"featured": false,
+		"tags": [
+			"Insurance",
+			"Full-Stack",
+			"Digital Transformation"
+		]
+	},
+	{
+		"id": "hospital-system",
+		"title": "Hospital Management System",
+		"subtitle": "Multi-Tenant Healthcare Platform",
+		"company": "Afya Arabia Kuwait",
+		"duration": "Jan 2015 – Dec 2015",
+		"description": "Multi-tenant hospital and clinic management platform. Built Afya-Portal, Afya-Clinic, and Afya-Pharmacy applications with centralized patient identity, appointments, SOAP notes, prescriptions, billing, and invoicing.",
+		"techStack": [
+			"Java",
+			"Spring Boot",
+			"Hibernate",
+			"AngularJS",
+			"MySQL"
+		],
+		"highlights": [
+			"Built Afya-Portal, Afya-Clinic, and Afya-Pharmacy applications",
+			"Implemented centralized patient identity (Afya-ID)",
+			"Enabled appointments, SOAP notes, prescriptions, billing, and invoicing",
+			"Streamlined hospital and clinic operations",
+			"Improved patient data consistency across departments",
+			"Reduced manual workflows and operational errors"
+		],
+		"featured": false,
+		"tags": [
+			"Healthcare",
+			"Multi-Tenant",
+			"Full-Stack"
+		]
+	},
+	{
+		"id": "payroll-systems",
+		"title": "Timesheet & Payroll Systems",
+		"subtitle": "Enterprise HR Automation",
+		"company": "Zambia Portland Cement & NthDimenzion",
+		"duration": "2014",
+		"description": "Enterprise attendance, timesheet, and payroll automation platforms. Developed attendance and timesheet systems with role-based approvals, consolidated reporting, and generated password-protected PDF payslips with automated email delivery.",
+		"techStack": [
+			"Java",
+			"Spring",
+			"Hibernate",
+			"MySQL",
+			"ZK Framework",
+			"Axon Framework",
+			"SparkJava"
+		],
+		"highlights": [
+			"Developed attendance and timesheet systems with role-based approvals",
+			"Implemented consolidated reporting and CSV exports",
+			"Generated password-protected PDF payslips with automated email delivery",
+			"Automated payroll and attendance processes",
+			"Reduced administrative overhead and errors",
+			"Improved reliability and security of employee compensation workflows"
+		],
+		"featured": false,
+		"tags": [
+			"HR Automation",
+			"Payroll",
+			"Enterprise"
+		]
+	}
+]

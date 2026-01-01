@@ -1,0 +1,209 @@
+Mohan Sharma
+SENIOR SOFTWARE ENGINEER
+Reach me at:
+Chandrapur, Bokajan
+Karbi Anglong, Assam-782490
+ 
+Ph: +91-8123885270
+Email: mtarrnesharma@gmail.com
+LinkedIn | GitHub | Knowledge Sharing (YouTube)
+ 
+PROFESSIONAL SUMMARY
+Senior Software Engineer with over 13 years of experience delivering large-scale, mission-critical enterprise systems across commerce, integration, and AI domains. Expert in Java, Spring ecosystem, SAP Commerce Cloud, SAP BTP, and SAP Integration Suite. In recent years, focused on architecting governance-first Agentic AI and RAG platforms. Known for strong architectural ownership, system thinking, and the ability to transform complex business requirements into scalable, secure, and maintainable solutions.
+ 
+PROFESSIONAL EXPERIENCE
+Senior Developer	SAP Labs India | Nov 2018 – Present
+Hybris Developer	Landmark Group | Apr 2017 – Oct 2018
+Software Engineer	NthDimenzion Solutions Pvt. Ltd. | Aug 2013 – Mar 2017
+ 
+DETAILED PROJECT PORTFOLIO:
+MCP Governance Security Gateway (Dec 2025 – Present):
+Enterprise-scale governance and security platform for Model Context Protocol (MCP) based Agentic AI systems.
+Tech Stack: MCP, CAP (Node.js), CDS, SAP XSUAA, SAP HANA, SAP BTP, Cloud Foundry
+•	Identified critical enterprise adoption blockers when scaling MCP agents from local experimentation to production, including lack of identity attribution, over-privileged access models, absence of centralized kill switches, prompt-injection–driven destructive actions, uncontrolled tool discovery, cross-tenant data leakage, fragmented logging, and shadow MCP server usage.
+•	Conceptualized and architected a centralized MCP Governance Gateway to convert MCP from a developer-centric protocol into a governed enterprise platform.
+•	Designed a Zero-Trust security model where all MCP capabilities are denied by default and explicitly enabled through centralized governance.
+•	Implemented identity-bound execution by integrating SAP XSUAA and JWT-based authentication, ensuring every AI action is traceable to a real human user.
+•	Designed fine-grained, capability-level RBAC, moving beyond coarse role-based permissions to tool-level and resource-specific authorization.
+•	Built a multi-tenant SaaS architecture on SAP BTP ensuring strict tenant isolation, enterprise-grade auditability, and forensic-ready centralized logging.
+•	Implemented a real-time operational kill switch allowing instant shutdown of compromised MCP servers without application restarts.
+Overall Impact
+•	Enabled secure, production-ready adoption of Agentic AI at enterprise scale.
+•	Established governance, accountability, and auditability as first-class AI platform capabilities.
+•	Significantly reduced operational, security, and compliance risks associated with AI agent execution.
+ 
+Test Harness for Concur Off RevDb Integration (Apr 2025 – Nov 2025):
+End-to-end automated test framework for validating complex multi-system enterprise integrations.
+Tech Stack: Java 25, Spring Boot 4, Cucumber-Spring, JUnit 5, Selenium, SAP APIM, SAP Integration Suite, Jenkins Declarative Pipeline
+•	Designed and developed a comprehensive BDD-driven test automation framework to validate integrations between Salesforce, Oracle BigMachine (BMI), SAP Concur, and SAP S/4HANA.
+•	Modelled real enterprise business flows using Gherkin feature files, enabling non-technical stakeholders to understand and validate integration behaviour.
+•	Implemented Selenium-based browser automation to create Salesforce opportunities and generate quotes in Oracle BMI.
+•	Triggered quote submission workflows via SAP APIM and SAP Integration Suite into SAP S/4HANA.
+•	Dynamically extracted generated Quote IDs and validated downstream business objects including Solution Quotations, Subscription Items, Subscription Contracts, Contract Account and Business Partners using SAP APIM.
+•	Integrated the framework into Jenkins Declarative Pipelines, enabling automated regression testing, artifact publishing, and early detection of integration regressions across environments.
+Overall Impact
+•	Improved confidence and reliability of highly complex, revenue-critical integrations.
+•	Reduced manual testing effort and regression risks across releases.
+•	Enabled faster delivery cycles with higher integration stability.
+ 
+Concur Off RevDb Integration using SAP CPI & APIM (Apr 2025 – Oct 2025):
+Enterprise-grade integration landscape connecting Salesforce, Oracle BigMachine, SAP Concur, and SAP S/4HANA.
+Tech Stack: SAP Integration Suite (CPI), SAP API Management, SAP BTP, Salesforce Bulk API, OData v4, SAP AIF, XML/JSON Message Mapping
+Integration 1: Oracle BigMachine → SAP S/4HANA (Quote to Revenue Flow)
+•	Designed and implemented secure inbound APIs using SAP API Management to receive Oracle BigMachine (BMI) quote data.
+•	Enforced authentication, authorization, IP whitelisting, and traffic control at the API gateway level.
+•	Built CPI integration flows exposing inbound HTTP adapters to accept quote payloads.
+•	Performed XML-to-JSON transformation, field-level data sanitization, enrichment, and validation using CPI message mappings.
+•	Routed transformed payloads to SAP AIF enabled S/4HANA endpoints, ensuring robust error handling, monitoring, and retry mechanisms.
+•	Enabled seamless creation and update of downstream business objects in S/4HANA with full traceability.
+Integration 2: Salesforce → SAP S/4HANA (Concur Projects Synchronization)
+•	Designed a periodic, batch-driven integration to synchronize Concur Project data from Salesforce into SAP S/4HANA.
+•	Implemented data extraction using Salesforce Bulk API to efficiently handle large datasets.
+•	Transformed Salesforce project data into S/4HANA-compatible structures within CPI.
+•	Persisted project data into SAP S/4HANA using OData v4 services.
+•	Implemented post-processing logic to update Salesforce records and mark projects as processed.
+•	Designed the flow to be idempotent, restart-safe, and operationally transparent.
+Overall Impact
+•	Established a robust, scalable integration backbone for Concur Off RevDb processes.
+•	Ensured secure API exposure, reliable transformations, and end-to-end traceability.
+•	Enabled seamless revenue and project data flow across enterprise systems with minimal manual intervention.
+ 
+Agentic RAG Platform for Concur Jira (Nov 2024 – Mar 2025):
+Agentic Retrieval-Augmented Generation platform for preserving and searching legacy Jira knowledge.
+Tech Stack: Python, LangChain, LangGraph, SAP Document AI, SAP HANA Vector Engine, SAP AI Core, Cloud Foundry, Svelte Kit, Svelte 5, LangChain.js, LangGraph.js
+•	Addressed knowledge loss risks during migration from on-premise Concur Jira to SAP Jira by designing a system to search legacy Jira data exported as PDFs.
+•	Built a document ingestion pipeline using Python and SAP Document AI to extract structured content from PDFs.
+•	Implemented intelligent document chunking and vectorization using SAP AI Core, SAP HANA Vector Engine, python, LangChain and LangGraph.
+•	Designed Agentic RAG workflows enabling multi-document reasoning and contextual conversations using LangChain.js and LangGraph.js
+•	Developed a modern chat-based frontend using Svelte Kit and Svelte 5.
+•	Deployed the solution on SAP BTP using Cloud Foundry and SAP AI Core.
+Overall Impact
+•	Prevented permanent loss of historical Jira knowledge.
+•	Improved productivity by enabling fast, conversational search across legacy data.
+•	Reduced dependency on tribal knowledge and manual document lookup.
+ 
+Machine Learning Based Salesforce Case Routing (Nov 2021 – Present):
+ML-driven automation platform to optimize Salesforce case routing and support efficiency.
+Tech Stack: Java 21, Spring Boot 3, Cloud Foundry, Salesforce REST API, SAP Intelligent Enterprise CoE ML Models
+•	Designed and implemented a system that automatically classifies incoming Salesforce cases using machine learning models.
+•	Fetched newly created Salesforce cases and sent case descriptions to ML models for prediction.
+•	Automatically assigned suggested queues based on ML recommendations.
+•	Retrieved closed cases post-resolution to compare predicted versus actual queues.
+•	Generated accuracy metrics to continuously evaluate ML effectiveness.
+Overall Impact
+•	Reduced manual case triaging effort for support teams.
+•	Improved first-response time and routing accuracy.
+•	Established a feedback loop to continuously improve ML model performance.
+ 
+SAP Concur Digital B2B Commerce Platform, USA (Nov 2018 – Present):
+Enterprise B2B digital commerce platform for SAP Concur subscription products.
+Tech Stack: Java, Spring, SAP Commerce Cloud, SAP Commerce Public Cloud, JavaScript, JSP, CI/CD Pipelines
+•	Contributed to the end-to-end development and continuous enhancement of SAP Concur Digital B2B Commerce Store.
+•	Enabled trial-to-paid conversion, subscription upgrades, transaction commitment increases, and add-on purchases.
+•	Implemented core B2B commerce capabilities including pricing, promotions, checkout, and subscription lifecycle management.
+•	Worked extensively on CI/CD pipelines and cloud deployments.
+Overall Impact
+•	Enabled scalable digital revenue channels for SAP Concur.
+•	Improved customer onboarding, upsell, and subscription management.
+•	Supported enterprise-grade reliability and performance at scale.
+ 
+Cache Management Platform, Landmark Group (Aug 2018 – Sep 2018):
+High-performance caching architecture for large-scale e-commerce traffic.
+Tech Stack: Java, Spring, SAP Commerce, Redis, Cloudflare, Spring Boot
+•	Identified performance bottlenecks caused by user-level caching.
+•	Designed a group-based caching strategy using hashed user-group combinations.
+•	Cached content using Redis and Cloudflare.
+•	Built a standalone cache management service for centralized invalidation.
+Overall Impact
+•	Significantly improved site performance during high-traffic promotions.
+•	Reduced infrastructure strain and page load times.
+•	Improved customer experience during peak sales events.
+ 
+Landmark Wallet System, Landmark Group (May 2018 – Jul 2018):
+Customer retention and refund optimization system for e-commerce platforms.
+Tech Stack: Java, Spring, SAP Commerce, JSP
+•	Designed and implemented a wallet-based refund mechanism.
+•	Redirected refunds into customer wallets instead of direct payment reversals.
+•	Enabled wallet reuse for future purchases.
+Overall Impact
+•	Improved customer retention and repeat purchases.
+•	Reduced revenue leakage from cancellations and returns.
+•	Enhanced customer lifetime value.
+ 
+Payments & Gift Card Integrations, Landmark Group (2017 – 2018):
+Payment and prepaid revenue enablement for multi-region e-commerce platforms.
+Tech Stack: Java, Spring, SAP Commerce, JSP, PayPal APIs, Qwikcilver APIs
+•	Integrated PayPal payment gateway for India and GCC markets.
+•	Implemented Qwikcilver gift card functionality.
+•	Contributed to Click & Collect, Sadad payments, and Bahrain site launches.
+Overall Impact
+•	Enabled secure, region-specific payment options.
+•	Generated prepaid revenue via gift cards.
+•	Improved checkout flexibility and customer reach.
+ 
+Life Insurance Management System, Prudential Life Assurance, Zambia (Jan 2016 – Mar 2017):
+End-to-end digital insurance management platform.
+Tech Stack: Java 8, Spring Boot, Hibernate, AngularJS, MySQL, MongoDB
+•	Developed insurance lifecycle workflows from plan creation to claims.
+•	Built modular backend services and dynamic frontends.
+•	Supported core online insurance operations.
+Overall Impact
+•	Digitized insurance operations end-to-end.
+•	Improved operational efficiency and data consistency.
+•	Enabled scalable online insurance services.
+ 
+Hospital Management System, Afya Arabia Kuwait (Jan 2015 – Dec 2015):
+Multi-tenant hospital and clinic management platform.
+Tech Stack: Java, Spring Boot, Hibernate, AngularJS, MySQL
+•	Built Afya-Portal, Afya-Clinic, and Afya-Pharmacy applications.
+•	Implemented centralized patient identity (Afya-ID).
+•	Enabled appointments, SOAP notes, prescriptions, billing, and invoicing.
+Overall Impact
+•	Streamlined hospital and clinic operations.
+•	Improved patient data consistency across departments.
+•	Reduced manual workflows and operational errors.
+ 
+Timesheet & Payroll Systems, Zambia Portland Cement & NthDimenzion (2014):
+Enterprise attendance, timesheet, and payroll automation platforms.
+Tech Stack: Java, Spring, Hibernate, MySQL, ZK Framework, Axon Framework, SparkJava
+•	Developed attendance and timesheet systems with role-based approvals.
+•	Implemented consolidated reporting and CSV exports.
+•	Generated password-protected PDF payslips with automated email delivery.
+Overall Impact
+•	Automated payroll and attendance processes.
+•	Reduced administrative overhead and errors.
+•	Improved reliability and security of employee compensation workflows.
+ 
+TECHNICAL SKILLS:
+Area	Technologies
+Languages	Java (8 - 25), Python, JavaScript
+Backend & Frameworks	Spring, Spring Boot, Hibernate, CAP (Node.js), CDS
+AI & Agentic Systems	MCP, LangChain, LangGraph, LangChain.js, LangGraph.js, SAP AI Core, Ollama
+RAG & Vector Search	SAP HANA Vector Engine, SAP Document AI, Chroma DB
+SAP & Integration	SAP BTP, Cloud Foundry, SAP CPI, SAP APIM
+Security & Identity	SAP XSUAA, OAuth 2.0, JWT
+Commerce	SAP Commerce Cloud (Hybris), B2B Commerce
+Frontend	Svelte Kit, Svelte 5, HTML, CSS, NodeJS, React
+Databases & Cache	SAP HANA, MySQL, PostgreSQL, MongoDB, Redis
+DevOps & CI/CD	Docker, Jenkins, Maven, Git Actions, Git
+Testing & Automation	JUnit 5, Cucumber, Selenium (BDD)
+External Systems	Salesforce (Force/Bulk API), Oracle BigMachine, PayPal, Qwikcilver
+ 
+EDUCATION:
+Bachelor of Technology (B.Tech), Computer Science & Engineering, Punjab Technical University, 2013
+
+Higher Secondary (Class XII)Science (Mathematics), J.B. College, Jorhat, Assam, 2009
+
+Secondary School (Class X), Vidhya Sagar High School, Bokajan, Karbi Anglong, Assam, 2007
+ 
+ACHIEVEMENTS & ADDITIONAL EXPERIENCE:
+Star Performer Award, SAP:
+Recognized for demonstrating a strong customer-centric mindset and consistently delivering high-impact enterprise solutions.
+GATE 2013 – Qualified:
+Secured All India Rank 6406, demonstrating strong fundamentals in computer science and engineering.
+Academic Excellence Scholarships:
+Awarded multiple scholarships for securing highest marks at the district level during secondary education.
+Class Coordinator, Computer Science & Engineering Department (2010 – 2013):
+Acted as a liaison between students and faculty, coordinating academic activities and departmental initiatives.
+Competitive Excellence:
+Winner and active participant in multiple quizzes, group discussions, and speech competitions, demonstrating strong analytical and communication skills.
