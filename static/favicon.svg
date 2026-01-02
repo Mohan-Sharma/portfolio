@@ -1,26 +1,41 @@
 <svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="neon-glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
-      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 25 -7" result="glow" />
+    <filter id="neon-glow-blue" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 18 -7" result="glow" />
       <feMerge>
-        <feMergeNode in="glow" />
         <feMergeNode in="glow" />
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
+    <filter id="neon-glow-cyan-green" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 18 -7" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#142d23;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#193728;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e3c2d;stop-opacity:1" />
+    </linearGradient>
   </defs>
-  <g filter="url(#neon-glow)">
-    <path d="M250 50 L423.2 150 V350 L250 450 L76.8 350 V150 Z" fill="none" stroke="#ffffff" stroke-width="12" />
-    <path d="M120 170 H155 L200 240 L245 170 H280 V330 H245 V265 L200 330 L155 265 V330 H120 V170 Z M295 170 H380 V205 H330 V245 H380 V330 H295 V295 H345 V265 H295 V170 Z" fill="none" stroke="#00FFFF" stroke-width="3" />
-    <path d="M132 188 H158 L200 250 L242 188 H268" stroke="#39FF14" stroke-width="3" fill="none"/>
-    <path d="M307 188 H368" stroke="#39FF14" stroke-width="3" fill="none"/>
-    <path d="M307 312 H368" stroke="#39FF14" stroke-width="3" fill="none"/>
-    <circle cx="132" cy="188" r="4" fill="#39FF14" />
-    <circle cx="268" cy="188" r="4" fill="#39FF14" />
-    <circle cx="307" cy="188" r="4" fill="#39FF14" />
-    <circle cx="368" cy="188" r="4" fill="#39FF14" />
-    <circle cx="307" cy="312" r="4" fill="#39FF14" />
-    <circle cx="368" cy="312" r="4" fill="#39FF14" />
+
+  <g transform="scale(1.2)" transform-origin="center">
+    <path d="M250 50 L423.2 150 V350 L250 450 L76.8 350 V150 Z" fill="url(#bg-gradient)" stroke="#FFD796" stroke-width="6" filter="url(#neon-glow-blue)" />
+
+    <g filter="url(#neon-glow-cyan-green)">
+      <path d="M130 180 H160 L200 240 L240 180 H270 V320 H240 V260 L200 320 L160 260 V320 H130 V180 Z M290 180 H370 V210 H320 V240 H370 V320 H290 V290 H340 V260 H290 V180 Z" fill="none" stroke="#F5CD6B" stroke-width="4" />
+      <circle cx="145" cy="180" r="4" fill="#FFD796" />
+      <circle cx="145" cy="320" r="4" fill="#FFD796" />
+      <circle cx="255" cy="180" r="4" fill="#FFD796" />
+      <circle cx="255" cy="320" r="4" fill="#FFD796" />
+      <circle cx="305" cy="180" r="4" fill="#FFD796" />
+      <circle cx="355" cy="180" r="4" fill="#FFD796" />
+      <circle cx="305" cy="320" r="4" fill="#FFD796" />
+      <circle cx="355" cy="320" r="4" fill="#FFD796" />
+    </g>
   </g>
 </svg>
