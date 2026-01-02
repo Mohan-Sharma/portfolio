@@ -21,24 +21,31 @@
 </script>
 
 <div class="chapter-title-page">
-	<!-- Background decorative elements -->
+	<!-- Corner frames -->
 	<div class="decorative-corner top-left"></div>
 	<div class="decorative-corner top-right"></div>
 	<div class="decorative-corner bottom-left"></div>
 	<div class="decorative-corner bottom-right"></div>
+
+	<!-- Top decoration line centered between top corners -->
+	<div class="decoration-group top-decoration animate-fadeInUp">
+		<div class="decoration-line"></div>
+		<div class="decoration-dot"></div>
+		<div class="decoration-line"></div>
+	</div>
+
+	<!-- Bottom decoration line centered between bottom corners -->
+	<div class="decoration-group bottom-decoration animate-[fadeInUp_0.6s_ease-out_0.6s_backwards]">
+		<div class="decoration-line"></div>
+		<div class="decoration-dot"></div>
+		<div class="decoration-line"></div>
+	</div>
 
 	<!-- Large artistic chapter number in background -->
 	<div class="chapter-number-bg">{data.number}</div>
 
 	<!-- Main content -->
 	<div class="chapter-content">
-		<!-- Top decoration -->
-		<div class="decoration-group animate-fadeInUp">
-			<div class="decoration-line"></div>
-			<div class="decoration-dot"></div>
-			<div class="decoration-line"></div>
-		</div>
-
 		<!-- Chapter label -->
 		<p class="chapter-label animate-[fadeInUp_0.6s_ease-out_0.2s_backwards]">
 			Chapter {chapterWord}
@@ -58,13 +65,6 @@
 				{data.subtitle}
 			</p>
 		{/if}
-
-		<!-- Bottom decoration -->
-		<div class="decoration-group animate-[fadeInUp_0.6s_ease-out_0.6s_backwards]">
-			<div class="decoration-line"></div>
-			<div class="decoration-dot"></div>
-			<div class="decoration-line"></div>
-		</div>
 	</div>
 </div>
 
@@ -140,12 +140,24 @@
 		gap: 1.5rem;
 	}
 
-	/* Decoration groups */
+	/* Decoration groups - positioned absolutely aligned with corners */
 	.decoration-group {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		gap: 1rem;
+		z-index: 2;
+	}
+
+	.decoration-group.top-decoration {
+		top: 4rem;
+	}
+
+	.decoration-group.bottom-decoration {
+		bottom: 4rem;
 	}
 
 	.decoration-line {
@@ -231,6 +243,14 @@
 		.decorative-corner.top-right,
 		.decorative-corner.bottom-right {
 			right: 1rem;
+		}
+
+		.decoration-group.top-decoration {
+			top: 1rem;
+		}
+
+		.decoration-group.bottom-decoration {
+			bottom: 1rem;
 		}
 
 		.chapter-number-bg {
