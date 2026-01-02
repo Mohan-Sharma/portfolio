@@ -121,11 +121,15 @@
 		position: absolute;
 		font-size: clamp(15rem, 30vw, 25rem);
 		font-weight: 900;
-		color: color-mix(in srgb, var(--color-accent) 5%, transparent);
+		color: color-mix(in srgb, var(--color-accent) 12%, transparent);
 		line-height: 1;
 		user-select: none;
 		pointer-events: none;
 		z-index: 0;
+	}
+
+	:global(.dark) .chapter-number-bg {
+		color: color-mix(in srgb, var(--color-accent) 5%, transparent);
 	}
 
 	/* Main content */
