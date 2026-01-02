@@ -337,8 +337,15 @@
 	}
 
 	:global(.dark) .animation-container {
-		/* Dark Mode: Deep dark background - NO cyan */
-		background: linear-gradient(135deg, #040508 0%, #0a0a0f 50%, #040508 100%);
+		/* Dark Mode: Sophisticated background with blue-gray radial highlights */
+		background:
+			radial-gradient(ellipse at 50% 0%, rgba(125, 163, 214, 0.15) 0%, transparent 50%),
+			radial-gradient(ellipse at 50% 100%, rgba(194, 199, 211, 0.15) 0%, transparent 50%),
+			linear-gradient(135deg,
+			rgb(21, 21, 27) 100%,
+			rgb(45, 49, 58) 50%,
+			rgb(7, 7, 9) 100%
+			);
 	}
 
 	/* The Book Container - Holds the Spine Axis */
@@ -419,14 +426,10 @@
 	/* FRONT (Cover) */
 	.flipper-front {
 		z-index: 2;
-		background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
-		border-radius: 0 1rem 1rem 0;
-	}
-	
-	:global(.dark) .flipper-front {
 		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 30%, rgba(35, 40, 55, 0.95) 60%, rgba(25, 30, 40, 0.95) 100%);
 		backdrop-filter: blur(25px) saturate(180%);
 		-webkit-backdrop-filter: blur(25px) saturate(180%);
+		border-radius: 0 1rem 1rem 0;
 	}
 
 	.cover-design {

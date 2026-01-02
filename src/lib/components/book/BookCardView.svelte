@@ -345,14 +345,14 @@
 	/* Navigation controls */
 	.navigation-controls {
 		position: fixed;
-		bottom: 2.5rem;
+		bottom: 1.5rem;
 		left: 50%;
 		transform: translateX(-50%);
 		z-index: 100;
 		display: flex;
 		align-items: center;
 		gap: 2.5rem;
-		padding: 1rem 2.5rem;
+		padding: 1rem 1rem;
 		background: rgba(255, 255, 255, 0.12);
 		backdrop-filter: blur(16px) saturate(180%);
 		border-radius: 9999px;
@@ -497,7 +497,7 @@
 
 		.navigation-controls {
 			gap: 1rem;
-			padding: 0.75rem 1.5rem;
+			padding: 0.75rem 1rem;
 		}
 
 		.nav-button {

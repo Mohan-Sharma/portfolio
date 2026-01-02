@@ -75,23 +75,24 @@
 	}
 
 	.bio-section {
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(226, 125, 96, 0.2);
+		background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
 		border-radius: 0.75rem;
 		padding: 2rem;
+		transition: all 0.3s ease;
 	}
 
 	.bio-text {
 		font-size: 1.0625rem;
 		line-height: 1.8;
-		color: rgba(230, 233, 239, 0.9);
+		color: var(--color-text-primary);
 		text-align: justify;
 	}
 
 	.bio-text::first-letter {
 		font-size: 3.5rem;
 		font-weight: 800;
-		color: #e27d60;
+		color: var(--color-accent);
 		float: left;
 		line-height: 1;
 		margin-right: 0.5rem;
@@ -105,8 +106,8 @@
 	}
 
 	.stat-card {
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(226, 125, 96, 0.2);
+		background: color-mix(in srgb, var(--color-text-primary) 3%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
 		border-radius: 0.75rem;
 		padding: 1.5rem;
 		text-align: center;
@@ -118,22 +119,22 @@
 	}
 
 	.stat-card:hover {
-		background: rgba(255, 255, 255, 0.05);
-		border-color: rgba(226, 125, 96, 0.4);
+		background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+		border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
 		transform: translateY(-4px);
-		box-shadow: 0 8px 24px rgba(226, 125, 96, 0.15);
+		box-shadow: 0 8px 24px color-mix(in srgb, var(--color-accent) 15%, transparent);
 	}
 
 	.stat-value {
 		font-size: 2.5rem;
 		font-weight: 800;
-		color: #e27d60;
+		color: var(--color-accent);
 	}
 
 	.stat-icon {
 		width: 2.5rem;
 		height: 2.5rem;
-		color: #e27d60;
+		color: var(--color-accent);
 	}
 
 	.stat-label {
@@ -141,27 +142,27 @@
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		color: rgba(230, 233, 239, 0.7);
+		color: var(--color-text-secondary);
 	}
 
 	.stat-location,
 	.stat-status {
 		font-size: 0.9375rem;
 		font-weight: 600;
-		color: #e6e9ef;
+		color: var(--color-text-primary);
 	}
 
 	.quote-section {
 		position: relative;
 		padding-left: 1.5rem;
-		border-left: 4px solid #e27d60;
+		border-left: 4px solid var(--color-accent);
 	}
 
 	.quote-text {
 		font-size: 1.125rem;
 		font-style: italic;
 		line-height: 1.8;
-		color: rgba(230, 233, 239, 0.9);
+		color: var(--color-text-primary);
 	}
 
 	@media (max-width: 768px) {

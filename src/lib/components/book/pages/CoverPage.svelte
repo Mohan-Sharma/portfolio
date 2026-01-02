@@ -73,11 +73,15 @@
 <style>
 	.cover-page {
 		height: 100%;
-		background: linear-gradient(135deg,
-			color-mix(in srgb, var(--color-accent) 90%, black) 0%,
-			color-mix(in srgb, var(--color-accent) 80%, black) 50%,
-			color-mix(in srgb, var(--color-accent) 70%, black) 100%
-		);
+		/* Rich dark blue-gray gradient matching other covers with subtle radial overlay */
+		background:
+			radial-gradient(circle at 30% 20%, rgba(51, 65, 85, 0.4) 0%, transparent 50%),
+			radial-gradient(circle at 70% 80%, rgba(30, 41, 59, 0.4) 0%, transparent 50%),
+			linear-gradient(135deg,
+				rgba(30, 41, 59, 0.98) 0%,
+				rgba(51, 65, 85, 0.98) 50%,
+				rgba(30, 41, 59, 0.98) 100%
+			);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -152,10 +156,10 @@
 	.main-title {
 		font-size: clamp(3rem, 8vw, 4.5rem);
 		font-weight: 800;
-		color: white;
+		color: rgba(255, 255, 255, 0.95);
 		line-height: 1;
 		letter-spacing: -0.02em;
-		text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 2px 2px 0 rgba(0, 0, 0, 0.2);
+		text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 	}
 
 	.decorative-line {
@@ -190,7 +194,7 @@
 
 	.subtitle {
 		font-size: clamp(1.25rem, 3vw, 1.5rem);
-		color: rgba(255, 255, 255, 0.95);
+		color: rgba(255, 255, 255, 0.85);
 		font-weight: 300;
 		letter-spacing: 0.1em;
 	}
@@ -203,7 +207,7 @@
 	}
 
 	.tagline {
-		color: rgba(255, 255, 255, 0.9);
+		color: rgba(255, 255, 255, 0.7);
 		font-size: clamp(0.875rem, 2vw, 1rem);
 		font-style: italic;
 		text-align: center;

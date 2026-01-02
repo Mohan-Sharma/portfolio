@@ -118,8 +118,15 @@
 	}
 
 	:global(.dark) .closed-book-container {
-		/* Dark Mode: Deep dark background - NO cyan/greenish */
-		background: linear-gradient(135deg, #040508 0%, #0a0a0f 50%, #040508 100%);
+		/* Dark Mode: Sophisticated background with blue-gray radial highlights */
+		background:
+			radial-gradient(ellipse at 50% 0%, rgba(125, 163, 214, 0.15) 0%, transparent 50%),
+			radial-gradient(ellipse at 50% 100%, rgba(194, 199, 211, 0.15) 0%, transparent 50%),
+			linear-gradient(135deg,
+			rgb(21, 21, 27) 100%,
+			rgb(45, 49, 58) 50%,
+			rgb(7, 7, 9) 100%
+			);
 	}
 
 	.instructions {
@@ -250,29 +257,15 @@
 	.cover-back-gradient {
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(
-			135deg,
-			rgba(251, 251, 250, 0.85) 0%,
-			rgba(240, 240, 245, 0.85) 100%
-		);
-	}
-
-	:global(.dark) .cover-back-gradient {
-		background: linear-gradient(
-			135deg,
-			rgba(30, 35, 45, 0.7) 0%,
-			rgba(40, 45, 60, 0.75) 100%
-		);
+		/* Rich dark blue-gray gradient that works on both light and dark backgrounds */
+		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 30%, rgba(35, 40, 55, 0.95) 60%, rgba(25, 30, 40, 0.95) 100%);
 	}
 
 	.cover-gradient {
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(
-			135deg,
-			rgba(251, 251, 250, 0.85) 0%,
-			rgba(248, 248, 253, 0.85) 100%
-		);
+		/* Rich dark blue-gray gradient that works on both light and dark backgrounds */
+		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 30%, rgba(35, 40, 55, 0.95) 60%, rgba(25, 30, 40, 0.95) 100%);
 		/* Add noise texture for realism */
 	}
 
@@ -283,18 +276,6 @@
 		background-image: url('https://grainy-gradients.vercel.app/noise.svg');
 		opacity: 0.03;
 		pointer-events: none;
-	}
-
-	:global(.dark) .cover-gradient {
-		background: linear-gradient(
-			135deg,
-			rgba(25, 30, 40, 0.7) 0%,
-			rgba(35, 40, 55, 0.75) 100%
-		);
-	}
-
-	:global(.dark) .cover-gradient::before {
-		opacity: 0.05;
 	}
 
 	.cover-content {
@@ -388,7 +369,7 @@
 		position: absolute;
 		right: 0;
 		top: 0;
-		width: 30px;
+		width: 20px;
 		height: 100%;
 		background: linear-gradient(
 			to right,
@@ -397,7 +378,7 @@
 			rgba(255, 255, 255, 0.1)
 		);
 		border-radius: 0 1rem 1rem 0;
-		transform: translateZ(-15px) translateX(25px);
+		transform: translateZ(-15px) translateX(7px);
 		box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.2);
 	}
 
