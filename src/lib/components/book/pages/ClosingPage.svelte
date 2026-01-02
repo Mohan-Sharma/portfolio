@@ -140,7 +140,7 @@
 	.book-end-text {
 		font-size: 0.875rem;
 		font-style: italic;
-		color: rgba(230, 233, 239, 0.7);
+		color: var(--color-text-secondary);
 	}
 
 	@media (max-width: 768px) {

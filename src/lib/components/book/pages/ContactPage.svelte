@@ -13,6 +13,14 @@
 	}
 
 	let { data }: Props = $props();
+
+	function handleDownloadResume() {
+		// Create a link element and trigger download
+		const link = document.createElement('a');
+		link.href = '/resume.docx';
+		link.download = 'resume.docx';
+		link.click();
+	}
 </script>
 
 <div class="contact-page">
@@ -70,7 +78,7 @@
 
 		<!-- Download CV Button -->
 		<div class="download-section animate-[fadeInUp_0.6s_ease-out_0.6s_backwards]">
-			<button class="download-button">
+			<button class="download-button" onclick={handleDownloadResume}>
 				<svg class="download-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path
 						stroke-linecap="round"
