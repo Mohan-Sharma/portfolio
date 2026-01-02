@@ -139,19 +139,28 @@
 	}
 
 	.instruction-text {
-		color: rgba(255, 255, 255, 0.9);
+		color: rgba(40, 50, 60, 0.9);
 		font-size: 1.125rem;
 		font-weight: 500;
 		margin-bottom: 0.75rem;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	}
+
+	:global(.dark) .instruction-text {
+		color: rgba(255, 255, 255, 0.9);
 		text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 	}
 
 	.instruction-icon {
 		width: 2rem;
 		height: 2rem;
-		color: rgba(255, 255, 255, 0.7);
+		color: rgba(40, 50, 60, 0.8);
 		margin: 0 auto;
 		animation: bounce 2s infinite;
+	}
+
+	:global(.dark) .instruction-icon {
+		color: rgba(255, 255, 255, 0.7);
 	}
 
 	@keyframes bounce {
@@ -199,9 +208,9 @@
 		height: 100%;
 		background: linear-gradient(
 			to right,
-			rgba(0, 0, 0, 0.5),
-			rgba(0, 0, 0, 0.3),
-			rgba(0, 0, 0, 0.4)
+			rgba(15, 35, 25, 0.9),
+			rgba(20, 40, 30, 0.7),
+			rgba(18, 38, 28, 0.8)
 		);
 		border-radius: 1rem 0 0 1rem;
 		transform: translateZ(-30px) rotateY(-90deg);
@@ -264,8 +273,13 @@
 	.cover-gradient {
 		position: absolute;
 		inset: 0;
-		/* Rich dark blue-gray gradient that works on both light and dark backgrounds */
-		background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 30%, rgba(35, 40, 55, 0.95) 60%, rgba(25, 30, 40, 0.95) 100%);
+		/* Rich dark forest green gradient for light mode */
+		background: linear-gradient(135deg,
+			rgba(20, 45, 35, 0.98) 0%,
+			rgba(25, 55, 40, 0.98) 30%,
+			rgba(30, 60, 45, 0.98) 60%,
+			rgba(20, 45, 35, 0.98) 100%
+		);
 		/* Add noise texture for realism */
 	}
 
@@ -298,14 +312,15 @@
 	.decoration-line {
 		height: 2px;
 		width: 4rem;
-		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+		background: linear-gradient(to right, transparent, rgba(255, 215, 150, 0.85), transparent);
 	}
 
 	.decoration-dot {
 		width: 6px;
 		height: 6px;
 		border-radius: 50%;
-		background: var(--color-accent);
+		background: rgba(255, 215, 150, 0.9);
+		box-shadow: 0 0 8px rgba(255, 215, 150, 0.4);
 	}
 
 	.cover-main {
@@ -316,28 +331,31 @@
 		font-size: clamp(2.5rem, 5vw, 4rem);
 		font-weight: 800;
 		line-height: 1.1;
-		color: var(--color-text-primary);
+		color: rgba(255, 255, 255, 0.98);
+		text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 		margin-bottom: 1rem;
 	}
 
 	.cover-divider {
 		width: 6rem;
 		height: 3px;
-		background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+		background: linear-gradient(to right, transparent, rgba(255, 215, 150, 0.9), transparent);
 		margin: 1.5rem auto;
 	}
 
 	.cover-title {
 		font-size: clamp(1.25rem, 2.5vw, 1.75rem);
 		font-weight: 600;
-		color: var(--color-accent);
+		color: rgba(255, 215, 150, 0.95);
+		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 		margin-bottom: 1rem;
 	}
 
 	.cover-tagline {
 		font-size: clamp(1rem, 2vw, 1.25rem);
 		font-weight: 400;
-		color: var(--color-text-secondary);
+		color: rgba(230, 235, 240, 0.9);
+		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 		font-style: italic;
 		line-height: 1.5;
 	}
@@ -368,17 +386,17 @@
 	.book-pages-edge {
 		position: absolute;
 		right: 0;
-		top: 0;
-		width: 20px;
-		height: 100%;
+		top: 2px;
+		width: 30px;
+		height: 99.5%;
 		background: linear-gradient(
 			to right,
-			rgba(0, 0, 0, 0.15),
-			rgba(0, 0, 0, 0.05),
-			rgba(255, 255, 255, 0.1)
+			rgba(1, 18, 5, 0.7),
+			rgba(190, 193, 191, 0.8),
+			rgba(1, 18, 1, 0.7)
 		);
 		border-radius: 0 1rem 1rem 0;
-		transform: translateZ(-15px) translateX(7px);
+		transform: translateZ(-15px) translateX(0px);
 		box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.2);
 	}
 

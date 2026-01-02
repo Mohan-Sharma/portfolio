@@ -73,14 +73,14 @@
 <style>
 	.cover-page {
 		height: 100%;
-		/* Rich dark blue-gray gradient matching other covers with subtle radial overlay */
+		/* Rich dark forest green gradient for light mode with subtle radial overlay */
 		background:
-			radial-gradient(circle at 30% 20%, rgba(51, 65, 85, 0.4) 0%, transparent 50%),
-			radial-gradient(circle at 70% 80%, rgba(30, 41, 59, 0.4) 0%, transparent 50%),
+			radial-gradient(circle at 30% 20%, rgba(30, 60, 45, 0.4) 0%, transparent 50%),
+			radial-gradient(circle at 70% 80%, rgba(20, 45, 35, 0.4) 0%, transparent 50%),
 			linear-gradient(135deg,
-				rgba(30, 41, 59, 0.98) 0%,
-				rgba(51, 65, 85, 0.98) 50%,
-				rgba(30, 41, 59, 0.98) 100%
+				rgba(20, 45, 35, 0.98) 0%,
+				rgba(30, 60, 45, 0.98) 50%,
+				rgba(20, 45, 35, 0.98) 100%
 			);
 		display: flex;
 		align-items: center;
@@ -172,14 +172,15 @@
 	.line {
 		height: 1px;
 		width: 4rem;
-		background: rgba(255, 255, 255, 0.6);
+		background: rgba(255, 215, 150, 0.75);
 	}
 
 	.dot {
 		width: 0.5rem;
 		height: 0.5rem;
 		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.8);
+		background: rgba(255, 215, 150, 0.9);
+		box-shadow: 0 0 8px rgba(255, 215, 150, 0.4);
 		animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 	}
 
@@ -194,7 +195,8 @@
 
 	.subtitle {
 		font-size: clamp(1.25rem, 3vw, 1.5rem);
-		color: rgba(255, 255, 255, 0.85);
+		color: rgba(255, 215, 150, 0.95);
+		text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 		font-weight: 300;
 		letter-spacing: 0.1em;
 	}

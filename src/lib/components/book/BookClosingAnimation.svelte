@@ -342,7 +342,11 @@
 
     .flipper-front {
         z-index: 2;
-        background: linear-gradient(135deg, rgba(25, 30, 40, 0.95) 0%, rgba(30, 35, 45, 0.95) 50%, rgba(35, 40, 55, 0.95) 100%);
+        background: linear-gradient(135deg,
+            rgba(20, 45, 35, 0.98) 0%,
+            rgba(25, 55, 40, 0.98) 50%,
+            rgba(20, 45, 35, 0.98) 100%
+        );
         border-radius: 0 1rem 1rem 0;
     }
 
@@ -384,7 +388,8 @@
     .cover-name {
         font-size: clamp(2rem, 4vw, 3rem);
         font-weight: 800;
-        color: #1c1c1e;
+        color: rgba(255, 255, 255, 0.98);
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
         text-align: center;
     }
 
@@ -395,7 +400,8 @@
     .cover-title {
         font-size: clamp(1rem, 2vw, 1.5rem);
         font-weight: 600;
-        color: #a64b35;
+        color: rgba(255, 215, 150, 0.95);
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         text-align: center;
     }
 
@@ -405,7 +411,8 @@
 
     .cover-tagline {
         font-size: 0.875rem;
-        color: #636366;
+        color: rgba(230, 235, 240, 0.9);
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         text-align: center;
         font-style: italic;
     }
@@ -417,21 +424,22 @@
     .cover-divider {
         width: 5rem;
         height: 3px;
-        background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+        background: linear-gradient(to right, transparent, rgba(255, 215, 150, 0.9), transparent);
         margin: 1rem auto;
     }
 
     .decoration-line {
         height: 2px;
         width: 3rem;
-        background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+        background: linear-gradient(to right, transparent, rgba(255, 215, 150, 0.85), transparent);
     }
 
     .decoration-dot {
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background: var(--color-accent);
+        background: rgba(255, 215, 150, 0.9);
+        box-shadow: 0 0 8px rgba(255, 215, 150, 0.4);
     }
 
     .cover-decoration {

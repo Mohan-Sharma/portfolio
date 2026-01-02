@@ -84,8 +84,8 @@ export class CVService {
 		const yearsDiff = now.getFullYear() - earliestDate.getFullYear();
 		const monthsDiff = now.getMonth() - earliestDate.getMonth();
 
-		// Adjust for partial years
-		return monthsDiff < 0 ? yearsDiff - 1 : yearsDiff;
+		// For now skip partial year calculation
+		return monthsDiff < 0 ? yearsDiff : yearsDiff;
 	}
 
 	/**
