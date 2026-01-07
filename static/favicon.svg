@@ -1,41 +1,43 @@
-<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="neon-glow-blue" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
-      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 18 -7" result="glow" />
-      <feMerge>
-        <feMergeNode in="glow" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-    <filter id="neon-glow-cyan-green" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
-      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 18 -7" result="glow" />
-      <feMerge>
-        <feMergeNode in="glow" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
-    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#142d23;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#193728;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1e3c2d;stop-opacity:1" />
-    </linearGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <style>
+        .mark { stroke: #0F172A; }
+        @media (prefers-color-scheme: dark) {
+        .mark { stroke: #F8FAFC; }
+        }
+    </style>
 
-  <g transform="scale(1.2)" transform-origin="center">
-    <path d="M250 50 L423.2 150 V350 L250 450 L76.8 350 V150 Z" fill="url(#bg-gradient)" stroke="#FFD796" stroke-width="6" filter="url(#neon-glow-blue)" />
+    <!-- Safe padding zone -->
+    <g transform="translate(80, 100) scale(0.95)">
 
-    <g filter="url(#neon-glow-cyan-green)">
-      <path d="M130 180 H160 L200 240 L240 180 H270 V320 H240 V260 L200 320 L160 260 V320 H130 V180 Z M290 180 H370 V210 H320 V240 H370 V320 H290 V290 H340 V260 H290 V180 Z" fill="none" stroke="#F5CD6B" stroke-width="4" />
-      <circle cx="145" cy="180" r="4" fill="#FFD796" />
-      <circle cx="145" cy="320" r="4" fill="#FFD796" />
-      <circle cx="255" cy="180" r="4" fill="#FFD796" />
-      <circle cx="255" cy="320" r="4" fill="#FFD796" />
-      <circle cx="305" cy="180" r="4" fill="#FFD796" />
-      <circle cx="355" cy="180" r="4" fill="#FFD796" />
-      <circle cx="305" cy="320" r="4" fill="#FFD796" />
-      <circle cx="355" cy="320" r="4" fill="#FFD796" />
+        <!-- M -->
+        <path
+                class="mark"
+                d="
+        M 0 200
+        L 0 20
+        L 55 120
+        L 110 20
+        L 110 200
+      "
+                fill="none"
+                stroke-width="26"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+        />
+
+        <!-- S (fully inside bounds now) -->
+        <path
+                class="mark"
+                d="
+        M 150 70
+        C 210 20, 290 30, 290 90
+        C 290 140, 210 140, 210 190
+        C 210 240, 290 250, 320 200
+      "
+                fill="none"
+                stroke-width="26"
+                stroke-linecap="round"
+        />
+
     </g>
-  </g>
 </svg>

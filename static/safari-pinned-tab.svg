@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <g transform="translate(80, 100) scale(0.95)">
+    <path d="M 0 200 L 0 20 L 55 120 L 110 20 L 110 200"
+          fill="none" stroke="#000000" stroke-width="26"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 150 70
+             C 210 20, 290 30, 290 90
+             C 290 140, 210 140, 210 190
+             C 210 240, 290 250, 320 200"
+          fill="none" stroke="#000000" stroke-width="26"
+          stroke-linecap="round"/>
+  </g>
+</svg>
