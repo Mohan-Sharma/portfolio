@@ -147,7 +147,7 @@
 	}
 
 	:global(.dark) .instruction-text {
-		color: rgba(255, 255, 255, 0.9);
+		color: rgba(255, 215, 150, 0.95);
 		text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 	}
 
@@ -160,7 +160,7 @@
 	}
 
 	:global(.dark) .instruction-icon {
-		color: rgba(255, 255, 255, 0.7);
+		color: rgba(255, 215, 150, 0.95);
 	}
 
 	@keyframes bounce {
